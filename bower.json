@@ -16,6 +16,8 @@
   ],
   "dependencies": {
     "uikit": "^2.27.1",
-    "angular": "^1.5.8"
+    "angular": "^1.5.8",
+    "angular-route": "^1.5.8",
+    "angular-resource": "^1.5.8"
   }
 }

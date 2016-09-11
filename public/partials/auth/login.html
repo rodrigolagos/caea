@@ -1,0 +1,38 @@
+<img class="uk-align-center" width="140" height="120" src="images/Logo_UTFSM.png" alt="">
+
+<h1 style="margin-bottom:30px;">¡Bienvenido al Sistema de Contenido Adaptable al Estilo de Aprendizaje!</h1>
+<div class="uk-container uk-container-center">
+    <div class="uk-grid">
+        <div class="uk-grid-width-small-1-1 uk-grid-width-large-3-10 uk-margin-bottom">
+            <form class="uk-panel uk-panel-box uk-form">
+                <div class="uk-form-row">
+                    <input class="uk-width-1-1 uk-form-large" type="text" placeholder="Nombre de usuario" ng-model="formData.user">
+                </div>
+                <div class="uk-form-row">
+                    <input class="uk-width-1-1 uk-form-large uk-form-password" type="password" placeholder="Contraseña" ng-model="formData.password">
+                </div>
+                <div class="uk-form-row">
+                    <button type="submit" class="uk-width-1-1 uk-button uk-button-primary uk-button-large" ng-click="Login()">Entrar</button>
+                </div>
+                <div ng-if="message" class="uk-alert uk-alert-danger" data-uk-alert="">
+                    <p>{{ message }}</p>
+                </div>
+            </form>
+        </div>
+        <div class="uk-grid-width-small-1-1 uk-grid-width-xlarge-7-10 uk-margin-bottom">
+            <div class="uk-grid-width-small-1-1 uk-width-1-1">
+                <div class="uk-panel uk-panel-box uk-margin-left">
+                    <h5>¿Aún no tienes una cuenta?</h5>
+                    <p>Regístrate como <strong>Estudiante</strong> haciendo <a href="#register">click aquí</a> y responde nuestra breve encuesta!</p>
+                </div>
+            </div>
+            <div class="uk-grid-width-small-1-1 uk-width-1-1">
+                <div class="uk-panel uk-panel-box uk-margin-top uk-margin-left">
+                    <h5>¿Quieres registrarte como <strong>Profesor</strong>?</h5>
+                    <p>Registrate haciendo <a href="">click aquí</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
