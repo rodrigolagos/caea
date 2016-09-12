@@ -20,4 +20,48 @@ router.post('/login', function(req, res, next) {
     });
 });
 
+router.post('/register', function(req, res, next) {
+
+    connection.query("INSERT INTO Estudiante(tipo_id, nombre, username, password, mail) VALUES("+ req.body.tipo_id +", '"+ req.body.name +"', '"+ req.body.username +"', '"+ req.body.password +"', '"+ req.body.mail +"')", function(err, rows, fields) {
+        if (err) throw err;
+        res.json('OK');
+    });
+});
+
+router.get('/preguntas', function(req, res, next) {
+    connection.query('SELECT * FROM Pregunta', function(err, rows, fields) {
+        res.json(rows);
+    });
+});
+
+router.get('/preguntas/alternativas', function(req, res, next) {
+    connection.query('SELECT * FROM Alternativa', function(err, rows, fields) {
+        res.json(rows);
+    });
+});
+
+router.get('/preguntas/alternativas/modalidades', function(req, res, next) {
+    connection.query('SELECT * FROM Modalidad', function(err, rows, fields) {
+        res.json(rows);
+    });
+});
+
+router.get('/preguntas/:id_pregunta/alternativas', function(req, res, next) {
+    connection.query('SELECT * FROM Alternativa WHERE pregunta_id = "'+ req.params.id_pregunta +'"', function(err, rows, fields) {
+        res.json(rows);
+    });
+});
+
+router.get('/preguntas/alternativas/modalidades', function(req, res, next) {
+    connection.query('SELECT * FROM Modalidad', function(err, rows, fields) {
+        res.json(rows);
+    });
+});
+
+router.get('/preguntas/alternativas/:id_alternativa/modalidad', function(req, res, next) {
+    connection.query('SELECT Modalidad.nombre FROM Modalidad, Alternativa WHERE modalidad_id = Modalidad.id AND Alternativa.id = "'+ req.params.id_alternativa +'"', function(err, rows, fields) {
+        res.json(rows);
+    });
+});
+
 module.exports = router;
