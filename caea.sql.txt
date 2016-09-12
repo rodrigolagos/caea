@@ -1,0 +1,315 @@
+-- MySQL Workbench Synchronization
+-- Generated: 2016-09-10 19:51
+-- Model: New Model
+-- Version: 1.0
+-- Project: Name of the project
+-- Author: Rodrigo Lagos
+
+CREATE DATABASE CAEA;
+
+USE CAEA;
+
+SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
+SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
+SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
+
+
+CREATE TABLE IF NOT EXISTS `caea`.`Profesor` (
+  `id` INT(11) NOT NULL AUTO_INCREMENT COMMENT '',
+  `nombre` VARCHAR(40) NOT NULL COMMENT '',
+  `username` VARCHAR(30) NOT NULL COMMENT '',
+  `password` VARCHAR(30) NOT NULL COMMENT '',
+  `mail` VARCHAR(50) NOT NULL COMMENT '',
+  `fecha_registro` TIMESTAMP NOT NULL COMMENT '',
+  `validado` TINYINT(1) NOT NULL DEFAULT 0 COMMENT '',
+  `imagen_perfil` VARCHAR(500) NULL DEFAULT NULL COMMENT '',
+  PRIMARY KEY (`id`)  COMMENT '')
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8
+COLLATE = utf8_general_ci;
+
+CREATE TABLE IF NOT EXISTS `caea`.`Validacion_Profesor` (
+  `id_solicitante` INT(11) NOT NULL COMMENT '',
+  `id_validador` INT(11) NOT NULL COMMENT '',
+  PRIMARY KEY (`id_validador`, `id_solicitante`)  COMMENT '',
+  CONSTRAINT `profesor_id_solicitante`
+    FOREIGN KEY (`id_solicitante`)
+    REFERENCES `caea`.`Profesor` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `profesor_id_validador`
+    FOREIGN KEY (`id_validador`)
+    REFERENCES `caea`.`Profesor` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8
+COLLATE = utf8_general_ci;
+
+CREATE TABLE IF NOT EXISTS `caea`.`Solicitud_Validacion` (
+  `id` INT(11) NOT NULL AUTO_INCREMENT COMMENT '',
+  `profesor_id` INT(11) NOT NULL COMMENT '',
+  `contenido` VARCHAR(500) NOT NULL COMMENT '',
+  PRIMARY KEY (`id`)  COMMENT '',
+  INDEX `profesor_id_solicitud_validacion_idx` (`profesor_id` ASC)  COMMENT '',
+  CONSTRAINT `profesor_id_solicitud_validacion`
+    FOREIGN KEY (`profesor_id`)
+    REFERENCES `caea`.`Profesor` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8
+COLLATE = utf8_general_ci;
+
+CREATE TABLE IF NOT EXISTS `caea`.`Estado` (
+  `id` INT(11) NOT NULL COMMENT '',
+  `solicitud_validacion_id` INT(11) NOT NULL COMMENT '',
+  `estado` VARCHAR(10) NOT NULL COMMENT '',
+  PRIMARY KEY (`id`)  COMMENT '',
+  INDEX `solicitud_validacion_id_estado_idx` (`solicitud_validacion_id` ASC)  COMMENT '',
+  CONSTRAINT `solicitud_validacion_id_estado`
+    FOREIGN KEY (`solicitud_validacion_id`)
+    REFERENCES `caea`.`Solicitud_Validacion` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8
+COLLATE = utf8_general_ci;
+
+CREATE TABLE IF NOT EXISTS `caea`.`Ramo` (
+  `id` INT(11) NOT NULL AUTO_INCREMENT COMMENT '',
+  `sigla` VARCHAR(10) NOT NULL COMMENT '',
+  `nombre` VARCHAR(45) NOT NULL COMMENT '',
+  PRIMARY KEY (`id`)  COMMENT '')
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8
+COLLATE = utf8_general_ci;
+
+CREATE TABLE IF NOT EXISTS `caea`.`Profesor_Ramo` (
+  `profesor_id` INT(11) NOT NULL COMMENT '',
+  `ramo_id` INT(11) NOT NULL COMMENT '',
+  PRIMARY KEY (`profesor_id`, `ramo_id`)  COMMENT '',
+  INDEX `ramo_id_profesor_ramo_idx` (`ramo_id` ASC)  COMMENT '',
+  CONSTRAINT `profesor_id_profesor_ramo`
+    FOREIGN KEY (`profesor_id`)
+    REFERENCES `caea`.`Profesor` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `ramo_id_profesor_ramo`
+    FOREIGN KEY (`ramo_id`)
+    REFERENCES `caea`.`Ramo` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8
+COLLATE = utf8_general_ci;
+
+CREATE TABLE IF NOT EXISTS `caea`.`Estudiante` (
+  `id` INT(11) NOT NULL AUTO_INCREMENT COMMENT '',
+  `tipo_id` INT(11) NOT NULL COMMENT '',
+  `nombre` VARCHAR(40) NOT NULL COMMENT '',
+  `username` VARCHAR(40) NOT NULL COMMENT '',
+  `password` VARCHAR(30) NOT NULL COMMENT '',
+  `mail` VARCHAR(50) NOT NULL COMMENT '',
+  `imagen_perfil` VARCHAR(500) NULL DEFAULT NULL COMMENT '',
+  PRIMARY KEY (`id`)  COMMENT '',
+  INDEX `tipo_id_estudiante_idx` (`tipo_id` ASC)  COMMENT '',
+  CONSTRAINT `tipo_id_estudiante`
+    FOREIGN KEY (`tipo_id`)
+    REFERENCES `caea`.`Tipo` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8
+COLLATE = utf8_general_ci;
+
+CREATE TABLE IF NOT EXISTS `caea`.`Estudiante_Ramo` (
+  `estudiante_id` INT(11) NOT NULL COMMENT '',
+  `ramo_id` INT(11) NOT NULL COMMENT '',
+  PRIMARY KEY (`estudiante_id`, `ramo_id`)  COMMENT '',
+  INDEX `ramo_id_estudiante_ramo_idx` (`ramo_id` ASC)  COMMENT '',
+  CONSTRAINT `ramo_id_estudiante_ramo`
+    FOREIGN KEY (`ramo_id`)
+    REFERENCES `caea`.`Ramo` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `estudiante_id_estudiante_ramo`
+    FOREIGN KEY (`estudiante_id`)
+    REFERENCES `caea`.`Estudiante` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8
+COLLATE = utf8_general_ci;
+
+CREATE TABLE IF NOT EXISTS `caea`.`Tipo` (
+  `id` INT(11) NOT NULL COMMENT '',
+  `tipo_aprendizaje` VARCHAR(20) NOT NULL COMMENT '',
+  `imagen_fondo` VARCHAR(500) NULL DEFAULT NULL COMMENT '',
+  PRIMARY KEY (`id`)  COMMENT '')
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8
+COLLATE = utf8_general_ci;
+
+CREATE TABLE IF NOT EXISTS `caea`.`Topico` (
+  `id` INT(11) NOT NULL AUTO_INCREMENT COMMENT '',
+  `ramo_id` INT(11) NOT NULL COMMENT '',
+  `titulo` VARCHAR(30) NOT NULL COMMENT '',
+  `indice` INT(11) NOT NULL COMMENT '',
+  PRIMARY KEY (`id`)  COMMENT '',
+  INDEX `ramo_id_topico_idx` (`ramo_id` ASC)  COMMENT '',
+  CONSTRAINT `ramo_id_topico`
+    FOREIGN KEY (`ramo_id`)
+    REFERENCES `caea`.`Ramo` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8
+COLLATE = utf8_general_ci;
+
+CREATE TABLE IF NOT EXISTS `caea`.`Comentario_Topico` (
+  `id` INT(11) NOT NULL AUTO_INCREMENT COMMENT '',
+  `topico_id` INT(11) NOT NULL COMMENT '',
+  `estudiante_id` INT(11) NOT NULL COMMENT '',
+  `comentario` VARCHAR(500) NOT NULL COMMENT '',
+  `fecha_hora` TIMESTAMP NOT NULL COMMENT '',
+  PRIMARY KEY (`id`)  COMMENT '',
+  INDEX `estudiante_id_comentario_topico_idx` (`estudiante_id` ASC)  COMMENT '',
+  INDEX `topico_id_comentario_topico_idx` (`topico_id` ASC)  COMMENT '',
+  CONSTRAINT `estudiante_id_comentario_topico`
+    FOREIGN KEY (`estudiante_id`)
+    REFERENCES `caea`.`Estudiante` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `topico_id_comentario_topico`
+    FOREIGN KEY (`topico_id`)
+    REFERENCES `caea`.`Topico` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8
+COLLATE = utf8_general_ci;
+
+CREATE TABLE IF NOT EXISTS `caea`.`Material` (
+  `id` INT(11) NOT NULL AUTO_INCREMENT COMMENT '',
+  `topico_id` INT(11) NOT NULL COMMENT '',
+  `titulo` VARCHAR(30) NOT NULL COMMENT '',
+  `descripcion` VARCHAR(500) NOT NULL COMMENT '',
+  `enlaceweb` VARCHAR(500) NULL DEFAULT NULL COMMENT '',
+  `archivo` VARCHAR(500) NULL DEFAULT NULL COMMENT '',
+  `texto` VARCHAR(500) NULL DEFAULT NULL COMMENT '',
+  `valoracion` INT(11) NOT NULL COMMENT '',
+  `posicion_a` INT(11) NOT NULL COMMENT '',
+  `posicion_b` INT(11) NOT NULL COMMENT '',
+  `posicion_c` INT(11) NOT NULL COMMENT '',
+  `posicion_d` INT(11) NOT NULL COMMENT '',
+  PRIMARY KEY (`id`)  COMMENT '',
+  INDEX `topico_id_material_idx` (`topico_id` ASC)  COMMENT '',
+  CONSTRAINT `topico_id_material`
+    FOREIGN KEY (`topico_id`)
+    REFERENCES `caea`.`Topico` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8
+COLLATE = utf8_general_ci;
+
+CREATE TABLE IF NOT EXISTS `caea`.`Comentario_Material` (
+  `id` INT(11) NOT NULL AUTO_INCREMENT COMMENT '',
+  `material_id` INT(11) NOT NULL COMMENT '',
+  `estudiante_id` INT(11) NOT NULL COMMENT '',
+  `comentario` VARCHAR(500) NOT NULL COMMENT '',
+  `fecha_hora` TIMESTAMP NOT NULL COMMENT '',
+  PRIMARY KEY (`id`)  COMMENT '',
+  INDEX `material_id_comentario_material_idx` (`material_id` ASC)  COMMENT '',
+  INDEX `estudiante_id_comentario_material_idx` (`estudiante_id` ASC)  COMMENT '',
+  CONSTRAINT `material_id_comentario_material`
+    FOREIGN KEY (`material_id`)
+    REFERENCES `caea`.`Material` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `estudiante_id_comentario_material`
+    FOREIGN KEY (`estudiante_id`)
+    REFERENCES `caea`.`Estudiante` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8
+COLLATE = utf8_general_ci;
+
+CREATE TABLE IF NOT EXISTS `caea`.`Feedback` (
+  `estudiante_id` INT(11) NOT NULL COMMENT '',
+  `material_id` INT(11) NOT NULL COMMENT '',
+  `valoracion` INT(11) NULL DEFAULT NULL COMMENT '',
+  `posicion` INT(11) NULL DEFAULT NULL COMMENT '',
+  `tipo_aprendizaje` VARCHAR(2) NOT NULL COMMENT '',
+  PRIMARY KEY (`estudiante_id`, `material_id`)  COMMENT '',
+  INDEX `material_id_feedback_idx` (`material_id` ASC)  COMMENT '',
+  CONSTRAINT `estudiante_id_feedback`
+    FOREIGN KEY (`estudiante_id`)
+    REFERENCES `caea`.`Estudiante` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `material_id_feedback`
+    FOREIGN KEY (`material_id`)
+    REFERENCES `caea`.`Material` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8
+COLLATE = utf8_general_ci;
+
+CREATE TABLE IF NOT EXISTS `caea`.`Administrador` (
+  `id` INT(11) NOT NULL COMMENT '',
+  `nombre` VARCHAR(40) NOT NULL COMMENT '',
+  `username` VARCHAR(30) NOT NULL COMMENT '',
+  `password` VARCHAR(30) NOT NULL COMMENT '',
+  `mail` VARCHAR(50) NOT NULL COMMENT '',
+  `imagen_perfil` VARCHAR(500) NULL DEFAULT NULL COMMENT '',
+  PRIMARY KEY (`id`)  COMMENT '')
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8
+COLLATE = utf8_general_ci;
+
+CREATE TABLE IF NOT EXISTS `caea`.`Pregunta` (
+  `id` INT(11) NOT NULL AUTO_INCREMENT COMMENT '',
+  `pregunta` VARCHAR(500) NOT NULL COMMENT '',
+  PRIMARY KEY (`id`)  COMMENT '')
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8
+COLLATE = utf8_general_ci;
+
+CREATE TABLE IF NOT EXISTS `caea`.`Alternativa` (
+  `id` INT(11) NOT NULL AUTO_INCREMENT COMMENT '',
+  `pregunta_id` INT(11) NOT NULL COMMENT '',
+  `modalidad_id` INT(11) NOT NULL COMMENT '',
+  `alternativa` VARCHAR(500) NOT NULL COMMENT '',
+  PRIMARY KEY (`id`)  COMMENT '',
+  INDEX `pregunta_id_alternativa_idx` (`pregunta_id` ASC)  COMMENT '',
+  INDEX `modalidad_id_alternativa_idx` (`modalidad_id` ASC)  COMMENT '',
+  CONSTRAINT `pregunta_id_alternativa`
+    FOREIGN KEY (`pregunta_id`)
+    REFERENCES `caea`.`Pregunta` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `modalidad_id_alternativa`
+    FOREIGN KEY (`modalidad_id`)
+    REFERENCES `caea`.`Modalidad` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8
+COLLATE = utf8_general_ci;
+
+CREATE TABLE IF NOT EXISTS `caea`.`Modalidad` (
+  `id` INT(11) NOT NULL COMMENT '',
+  `nombre` VARCHAR(2) NOT NULL COMMENT '',
+  PRIMARY KEY (`id`)  COMMENT '')
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8
+COLLATE = utf8_general_ci;
+
+
+SET SQL_MODE=@OLD_SQL_MODE;
+SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
+SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;

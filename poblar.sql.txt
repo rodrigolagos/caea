@@ -1,0 +1,115 @@
+use caea;
+
+-- Agregar Tipos de aprendizaje
+
+INSERT Tipo(id, tipo_aprendizaje) VALUES(1, 'Divergente');
+INSERT Tipo(id, tipo_aprendizaje) VALUES(2, 'Asimilador');
+INSERT Tipo(id, tipo_aprendizaje) VALUES(3, 'Adaptador');
+INSERT Tipo(id, tipo_aprendizaje) VALUES(4, 'Convergente');
+
+-- Agregar las 12 preguntas de la encuesta
+
+INSERT INTO Pregunta(pregunta) VALUES ('Cuando aprendo..');
+INSERT INTO Pregunta(pregunta) VALUES ('Aprendo mejor cuando..');
+INSERT INTO Pregunta(pregunta) VALUES ('Cuando estoy aprendiendo..');
+INSERT INTO Pregunta(pregunta) VALUES ('Yo aprendo..');
+INSERT INTO Pregunta(pregunta) VALUES ('Cuando aprendo..');
+INSERT INTO Pregunta(pregunta) VALUES ('Cuando estoy aprendiendo..');
+INSERT INTO Pregunta(pregunta) VALUES ('Yo aprendo mejor de..');
+INSERT INTO Pregunta(pregunta) VALUES ('Cuando aprendo..');
+INSERT INTO Pregunta(pregunta) VALUES ('Aprendo mejor cuando..');
+INSERT INTO Pregunta(pregunta) VALUES ('Cuando estoy aprendiendo..');
+INSERT INTO Pregunta(pregunta) VALUES ('Cuando aprendo..');
+INSERT INTO Pregunta(pregunta) VALUES ('Aprendo mejor cuando..');
+
+-- ----------------------------------------------------------------------------
+
+-- Agregar las 4 modalidades de alternativas (aprendizaje)
+INSERT INTO Modalidad VALUES (1,'EC');
+INSERT INTO Modalidad VALUES (2,'OR');
+INSERT INTO Modalidad VALUES (3,'CA');
+INSERT INTO Modalidad VALUES (4,'EA');
+
+-- ----------------------------------------------------------------------------
+
+-- Agregar las 4 alternativas de la pregunta 1
+INSERT INTO Alternativa(pregunta_id,modalidad_id,alternativa) VALUES(1,1,'me gusta vivir sensaciones');
+INSERT INTO Alternativa(pregunta_id,modalidad_id,alternativa) VALUES(1,2,'me gusta pensar sobre ideas');
+INSERT INTO Alternativa(pregunta_id,modalidad_id,alternativa) VALUES(1,3,'me gusta estar haciendo cosas');
+INSERT INTO Alternativa(pregunta_id,modalidad_id,alternativa) VALUES(1,4,'me gusta observar y escuchar');
+
+-- Agregar las 4 alternativas de la pregunta 2
+INSERT INTO Alternativa(pregunta_id,modalidad_id,alternativa) VALUES(2,1,'escucho y observo cuidadosamente');
+INSERT INTO Alternativa(pregunta_id,modalidad_id,alternativa) VALUES(2,2,'confio en el pensamiento logico');
+INSERT INTO Alternativa(pregunta_id,modalidad_id,alternativa) VALUES(2,3,'confio en mi intuicion y sentimientos');
+INSERT INTO Alternativa(pregunta_id,modalidad_id,alternativa) VALUES(2,4,'trabajo duro para lograr hacer las cosas');
+
+-- Agregar las 4 alternativas de la pregunta 3
+INSERT INTO Alternativa(pregunta_id,modalidad_id,alternativa) VALUES(3,1,'tiendo a usar el razonamiento');
+INSERT INTO Alternativa(pregunta_id,modalidad_id,alternativa) VALUES(3,2,'soy responsable con lo que hago');
+INSERT INTO Alternativa(pregunta_id,modalidad_id,alternativa) VALUES(3,3,'soy callado y reservado');
+INSERT INTO Alternativa(pregunta_id,modalidad_id,alternativa) VALUES(3,4,'tengo fuertes sensaciones y reacciones');
+
+-- Agregar las 4 alternativas de la pregunta 4
+INSERT INTO Alternativa(pregunta_id,modalidad_id,alternativa) VALUES(4,1,'sintiendo');
+INSERT INTO Alternativa(pregunta_id,modalidad_id,alternativa) VALUES(4,2,'haciendo');
+INSERT INTO Alternativa(pregunta_id,modalidad_id,alternativa) VALUES(4,3,'observando');
+INSERT INTO Alternativa(pregunta_id,modalidad_id,alternativa) VALUES(4,4,'pensando');
+
+-- Agregar las 4 alternativas de la pregunta 5
+INSERT INTO Alternativa(pregunta_id,modalidad_id,alternativa) VALUES(5,1,'estoy abierto a nuevas experiencias');
+INSERT INTO Alternativa(pregunta_id,modalidad_id,alternativa) VALUES(5,2,'observo todos los aspectos del asunto');
+INSERT INTO Alternativa(pregunta_id,modalidad_id,alternativa) VALUES(5,3,'me gusta analizar las cosas, descomponerlas en sus partes');
+INSERT INTO Alternativa(pregunta_id,modalidad_id,alternativa) VALUES(5,4,'me gusta probar e intentar hacer las cosas');
+
+-- Agregar las 4 alternativas de la pregunta 6
+INSERT INTO Alternativa(pregunta_id,modalidad_id,alternativa) VALUES(6,1,'soy una persona observadora');
+INSERT INTO Alternativa(pregunta_id,modalidad_id,alternativa) VALUES(6,2,'soy una persona activa');
+INSERT INTO Alternativa(pregunta_id,modalidad_id,alternativa) VALUES(6,3,'soy una persona intuitiva');
+INSERT INTO Alternativa(pregunta_id,modalidad_id,alternativa) VALUES(6,4,'soy una persona logica');
+
+-- Agregar las 4 alternativas de la pregunta 7
+INSERT INTO Alternativa(pregunta_id,modalidad_id,alternativa) VALUES(7,1,'la observacion');
+INSERT INTO Alternativa(pregunta_id,modalidad_id,alternativa) VALUES(7,2,'la relacion con otras personas');
+INSERT INTO Alternativa(pregunta_id,modalidad_id,alternativa) VALUES(7,3,'las teorías racionales');
+INSERT INTO Alternativa(pregunta_id,modalidad_id,alternativa) VALUES(7,4,'la oportunidad de probar y practicar');
+
+-- Agregar las 4 alternativas de la pregunta 8
+INSERT INTO Alternativa(pregunta_id,modalidad_id,alternativa) VALUES(8,1,'me gusta ver los resultados de mi trabajo');
+INSERT INTO Alternativa(pregunta_id,modalidad_id,alternativa) VALUES(8,2,'me gustan las ideas y las teorias');
+INSERT INTO Alternativa(pregunta_id,modalidad_id,alternativa) VALUES(8,3,'me tomo mi tiempo antes de actuar');
+INSERT INTO Alternativa(pregunta_id,modalidad_id,alternativa) VALUES(8,4,'me siento personalmente involucrado en las cosas');
+
+-- Agregar las 4 alternativas de la pregunta 9
+INSERT INTO Alternativa(pregunta_id,modalidad_id,alternativa) VALUES(9,1,'confio en mis observaciones');
+INSERT INTO Alternativa(pregunta_id,modalidad_id,alternativa) VALUES(9,2,'confio en mis sentimientos');
+INSERT INTO Alternativa(pregunta_id,modalidad_id,alternativa) VALUES(9,3,'puedo probar por mi cuenta');
+INSERT INTO Alternativa(pregunta_id,modalidad_id,alternativa) VALUES(9,4,'confio en mis ideas');
+
+-- Agregar las 4 alternativas de la pregunta 10
+INSERT INTO Alternativa(pregunta_id,modalidad_id,alternativa) VALUES(10,1,'soy una persona reservada');
+INSERT INTO Alternativa(pregunta_id,modalidad_id,alternativa) VALUES(10,2,'soy una persona receptiva');
+INSERT INTO Alternativa(pregunta_id,modalidad_id,alternativa) VALUES(10,3,'soy una persona responsable');
+INSERT INTO Alternativa(pregunta_id,modalidad_id,alternativa) VALUES(10,4,'soy una persona racional');
+
+-- Agregar las 4 alternativas de la pregunta 11
+INSERT INTO Alternativa(pregunta_id,modalidad_id,alternativa) VALUES(11,1,'me involucro');
+INSERT INTO Alternativa(pregunta_id,modalidad_id,alternativa) VALUES(11,2,'me gusta observar');
+INSERT INTO Alternativa(pregunta_id,modalidad_id,alternativa) VALUES(11,3,'evaluo las cosas');
+INSERT INTO Alternativa(pregunta_id,modalidad_id,alternativa) VALUES(11,4,'me gusta ser activo');
+
+-- Agregar las 4 alternativas de la pregunta 12
+INSERT INTO Alternativa(pregunta_id,modalidad_id,alternativa) VALUES(12,1,'analizo ideas');
+INSERT INTO Alternativa(pregunta_id,modalidad_id,alternativa) VALUES(12,2,'soy receptivo y abierto');
+INSERT INTO Alternativa(pregunta_id,modalidad_id,alternativa) VALUES(12,3,'soy cuidadoso');
+INSERT INTO Alternativa(pregunta_id,modalidad_id,alternativa) VALUES(12,4,'soy practico');
+
+-- ----------------------------------------------------------------------------
+
+-- Agregar ramo
+INSERT INTO Ramo(sigla,nombre) VALUES('FIS120','Fisica General II');
+
+-- ----------------------------------------------------------------------------
+
+-- Agregar topico
+INSERT INTO Topico(ramo_id,titulo,indice) VALUES(1,'Potencial electrico',1);
