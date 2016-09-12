@@ -6,7 +6,7 @@ router.get('/', function(req, res, next) {
   if (!req.session.userName) {
       res.redirect('/auth');
   }
-  res.render('index', { title: req.session.userName });
+  res.render('index', { title: 'CAEA', username: req.session.userName });
 });
 
 router.get('/logout', function(req, res, next) {
