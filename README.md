@@ -21,9 +21,9 @@ Instalar componentes del proyecto
 bower install
 ```
 
-Ejecutar el archivo de script SQL “caea.sql”
+Ejecutar el archivo de script SQL “caea.sql.txt”
 
-Ejecutar el archivo de script SQL “poblar.sql”
+Ejecutar el archivo de script SQL “poblar.sql.txt”
 
 
 Editar el archivo “connection.example.js”
