@@ -1,0 +1,36 @@
+<div class="uk-grid">
+    <div class="uk-width-medium-1-4">
+        <div ng-include="'views/admin/includes/sidenav-menu.html'"></div>
+    </div>
+
+    <div class="uk-width-medium-3-4">
+        <ul class="uk-breadcrumb uk-margin-top">
+            <li><a href="/admin">Administración</a></li>
+            <li><a href="/admin/courses">Cursos</a></li>
+            <li class="uk-active">{{ course.title }}</li>
+        </ul>
+        <h1 class="caea-title">{{ course.title }} <a class="uk-button uk-button-small" href="#">Editar</a> </h1>
+        <table class="uk-table uk-table-striped">
+            <thead>
+            <tr>
+                <th>Titulo</th>
+                <th>Fecha</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>{{ course.title }}</td>
+                <td>{{ course.published | date }}</td>
+            </tr>
+            </tbody>
+        </table>
+
+        <h3>Tópicos del curso</h3>
+        <div class="uk-panel-box uk-margin-small-top" ng-repeat="topic in course.topics">
+            {{ topic.title }}
+            <div class="uk-float-right">
+                <a class="uk-button uk-button-small" href="/admin/topic/{{ topic.id }}"><i class="uk-icon-info-circle"></i> Ver tópico</a>
+            </div>
+        </div>
+    </div>
+</div>

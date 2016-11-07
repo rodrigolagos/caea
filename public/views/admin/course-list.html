@@ -1,0 +1,35 @@
+<div class="uk-grid">
+    <div class="uk-width-medium-1-4">
+        <div ng-include="'views/admin/includes/sidenav-menu.html'"></div>
+    </div>
+
+    <div class="uk-width-medium-3-4">
+        <ul class="uk-breadcrumb uk-margin-top">
+            <li><a href="/admin">Administración</a></li>
+            <li class="uk-active">Cursos</li>
+        </ul>
+        <div class="uk-float-right uk-margin-top">
+            <form class="uk-form uk-margin-remove uk-display-inline-block">
+                <input placeholder="Filter" ng-model="searchText">
+                <select ng-model="sortOrder" ng-options="item.value as item.text for item in sortOptions"></select>
+            </form>
+        </div>
+        <h1 class="caea-title">Cursos</h1>
+        <table class="uk-table uk-table-striped">
+            <thead>
+            <tr>
+                <th>Titulo</th>
+                <th>Fecha</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="course in courses | filter:searchText | orderBy:sortOrder">
+                <td>{{ course.title }}</td>
+                <td>{{ course.published | date }}</td>
+                <td class="uk-width-1-10"><a href="/admin/course/{{ course.id }}">Ver curso</a></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

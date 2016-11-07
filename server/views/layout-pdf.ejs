@@ -1,0 +1,36 @@
+
+<!DOCTYPE html>
+<html lang="en" data-ng-app="pdf" ng-controller="AppCtrl">
+<head>
+    <meta charset="utf-8"/>
+    <title>Angular PDF.js demo</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <script src="/vendor/pdf.js-viewer/pdf.js"></script>
+    <link rel="stylesheet" href="/vendor/pdf.js-viewer/viewer.css">
+
+    <script src="/vendor/angular/angular.js"></script>
+    <script type="text/javascript" src="/vendor/angular-resource/angular-resource.js"></script>
+    <script type="text/javascript" src="/vendor/angular-route/angular-route.js"></script>
+    <script src="/vendor/angular-pdfjs-viewer/dist/angular-pdfjs-viewer.js"></script>
+    <script src="/app/pdf.js"></script>
+
+    <style>
+        html, body {
+            height: 100%;
+            width: 100%;
+            margin: 0;
+            padding: 0;
+        }
+
+        .some-pdf-container {
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+<body>
+<%-mainContent%>
+
+</body>
+</html>

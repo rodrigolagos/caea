@@ -1,0 +1,36 @@
+<div class="uk-grid">
+    <div class="uk-width-medium-1-4">
+        <div ng-include="'views/admin/includes/sidenav-menu.html'"></div>
+    </div>
+
+    <div class="uk-width-medium-3-4">
+        <ul class="uk-breadcrumb uk-margin-top">
+            <li><a href="/admin">Administración</a></li>
+            <li><a href="/admin/courses">Cursos</a></li>
+            <li><a href="/admin/course/{{ course.id }}">{{ course.title }}</a></li>
+            <li class="uk-active">{{ topic.title }}</li>
+        </ul>
+        <h1 class="caea-title">{{ topic.title }} <a class="uk-button uk-button-small">Editar</a> </h1>
+        <table class="uk-table uk-table-striped">
+            <thead>
+            <tr>
+                <th>Titulo</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>{{ topic.title }}</td>
+            </tr>
+            </tbody>
+        </table>
+
+        <h3>Materiales del tópico <a class="uk-button uk-button-primary uk-button-small" href="/admin/topic/{{ topic.id }}/materials/crear"><i class="uk-icon-upload"></i> Subir material</a></h3>
+        <p class="uk-text-danger uk-margin-top" ng-show="materials.error">Este tópico aún no tiene materiales.</p>
+        <div class="uk-panel-box uk-margin-small-top" ng-repeat="material in materials" ng-show="!materials.error">
+            {{ material.title }}
+            <div class="uk-float-right">
+                <a class="uk-button uk-button-small" href="#"><i class="uk-icon-info"></i> Ver material</a>
+            </div>
+        </div>
+    </div>
+</div>

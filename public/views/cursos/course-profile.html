@@ -1,0 +1,13 @@
+<ul class="uk-breadcrumb uk-margin-top">
+    <li><a href="/">Mis cursos</a></li>
+    <li>{{ course.title }}</li>
+</ul>
+<h1>{{ course.title }}</h1>
+<p>A continuación se muestran listadas las unidades del curso</p>
+<table class="uk-table uk-table-striped">
+    <tbody>
+    <tr ng-repeat="topic in course.topics">
+        <td><a href="/course/{{ course.id }}/topic/{{ topic.id }}">{{ topic.title }}</a></td>
+    </tr>
+    </tbody>
+</table>

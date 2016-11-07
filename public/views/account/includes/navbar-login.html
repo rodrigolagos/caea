@@ -1,0 +1,26 @@
+<div class="uk-navbar-flip" ng-controller="caeaNavBarLoginCtrl">
+    <ul class="uk-navbar-nav" ng-hide="identity.isAuthenticated()">
+        <div class="uk-navbar-content">
+            <!--<form class="uk-form uk-margin-remove uk-display-inline-block" name="loginForm">
+                <input placeholder="username" ng-model="username">
+                <input type="password" placeholder="password" ng-model="password">
+                <button class="uk-button uk-button-primary" ng-click="signin(username, password)">Login</button>
+            </form>
+            <a class="uk-button" data-uk-modal="{target:'#signupModal'}">Registrarse</a>-->
+            <a class="uk-button" href="/signup">Registrarse</a>
+        </div>
+    </ul>
+    <ul class="uk-navbar-nav" ng-show="identity.isAuthenticated()">
+        <li class="uk-parent" data-uk-dropdown="{mode:'click'}">
+            <a href="">{{ identity.currentUser.firstName + " " + identity.currentUser.lastName }} <i class="uk-icon-caret-down"></i></a>
+
+            <div class="uk-dropdown uk-dropdown-close uk-dropdown-navbar uk-dropdown-bottom" style="top: 40px; left: 0px;">
+                <ul class="uk-nav uk-nav-navbar">
+                    <li><a href="/profile">Profile</a></li>
+                    <li><a href="" ng-click="signout()">Sign Out</a></li>
+                </ul>
+            </div>
+
+        </li>
+    </ul>
+</div>

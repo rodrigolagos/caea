@@ -1,0 +1,39 @@
+<div class="uk-grid">
+    <div class="uk-width-medium-1-4">
+        <div ng-include="'views/admin/includes/sidenav-menu.html'"></div>
+    </div>
+
+    <div class="uk-width-medium-3-4">
+        <ul class="uk-breadcrumb uk-margin-top">
+            <li><a href="/admin">Administración</a></li>
+            <li class="uk-active">Usuarios</li>
+        </ul>
+        <div class="uk-grid">
+            <div class="uk-width-small-1-1 uk-width-medium-1-2">
+                <h1 class="caea-title">Usuarios <a class="uk-button uk-button-small" href="/admin/user/crear"><i class="uk-icon-plus"></i> Crear usuario</a></h1>
+            </div>
+            <div class="uk-width-small-1-1 uk-width-medium-1-2 uk-margin-small-top">
+                <form class="uk-form uk-margin-remove uk-display-inline-block uk-float-right">
+                    <input placeholder="Filter" ng-model="searchText">
+                    <select ng-model="sortOrder" ng-options="item.value as item.text for item in sortOptions"></select>
+                </form>
+            </div>
+        </div>
+        <table class="uk-table uk-table-striped">
+            <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="user in users | filter:searchText | orderBy:sortOrder">
+                <td>{{ user.firstName }}</td>
+                <td>{{ user.lastName }}</td>
+                <td class="uk-width-1-10"><a href="/admin/user/{{ user.id }}">Ver perfil</a></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

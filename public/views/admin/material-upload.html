@@ -1,0 +1,56 @@
+<div class="uk-grid">
+    <div class="uk-width-medium-1-4">
+        <div ng-include="'views/admin/includes/sidenav-menu.html'"></div>
+    </div>
+
+    <div class="uk-width-medium-3-4">
+        <ul class="uk-breadcrumb uk-margin-top">
+            <li><a href="/admin">Administración</a></li>
+            <li><a href="/admin/courses">Cursos</a></li>
+            <li><a href="/admin/course/{{ course.id }}">{{ course.title }}</a></li>
+            <li><a href="/admin/topic/{{ topic.id }}">{{ topic.title }}</a></li>
+            <li class="uk-active">Subir material</li>
+        </ul>
+        <h1 class="caea-title">Subir material</h1>
+        <div class="uk-panel-box">
+            <form class="uk-form uk-form-horizontal" ng-controller="caeaAdminMaterialUploadCtrl as up" name="up.upload_form">
+
+                <div class="uk-form-row">
+                    <label class="uk-form-label" for="name">Nombre</label>
+                    <div class="uk-form-controls">
+                        <input class="uk-width-1-1" type="text" id="name" name="name" placeholder="First Name" ng-model="name" required>
+                    </div>
+                </div>
+                <div class="uk-form-row">
+                    <label class="uk-form-label" for="file">Archivo</label>
+                    <div class="uk-form-controls">
+                        <div class="uk-form-file">
+                            <button class="uk-button">Seleccionar archivo</button>
+                            <input
+                                    id="file"
+                                    type="file"
+                                    ngf-select
+                                    ng-model="up.file"
+                                    name="file"
+                                    ngf-pattern="'image/*,application/pdf,video/*'"
+                                    accept="image/*,application/pdf,video/*"
+                                    ngf-max-size="20MB"
+                                    required/>
+                        </div>
+                        <span ng-show="up.upload_form.file.$error.maxSize" class="uk-text-danger">Archivo demasiado grande (máximo 20MB)</span>
+                        <span class="uk-text-success" ng-show="up.upload_form.file.$valid">{{up.file.name}} - {{up.file.size / 1000000|number:1}}MB.</span>
+                    </div>
+                </div>
+
+                <div id="progress" class="uk-progress uk-progress-striped uk-hidden">
+                    <div class="uk-progress-bar" ng-style="{width : ( up.progressPercentage + '%' ) }">{{up.progressPercentage}}%</div>
+                </div>
+
+                <div class="uk-form-row">
+                    <button id="subir-material" type="submit" ng-click="up.submit()" class="uk-button uk-button-primary uk-margin-top" ng-disabled="up.upload_form.$invalid">Subir material</button>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>

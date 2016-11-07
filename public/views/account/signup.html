@@ -1,0 +1,46 @@
+<div class="uk-container uk-margin-large-top">
+    <div class="uk-container-center uk-width-medium-1-2">
+
+        <div class="uk-text-center">
+            <img width="140" height="120" src="/img/logo-usm.png" alt="">
+            <h2 class="uk-text-center" style="margin-top: 0px">CAEA</h2>
+        </div>
+
+        <div class="uk-panel uk-panel-box">
+        <form class="uk-form uk-form-horizontal" name="signupForm" ng-controller="caeaSignupCtrl">
+
+            <div class="uk-form-row">
+                <label class="uk-form-label" for="email">Email</label>
+                <div class="uk-form-controls">
+                    <input class="uk-width-1-1" type="email" id="email" name="email" placeholder="Email" ng-model="email" required>
+                </div>
+            </div>
+            <div class="uk-form-row">
+                <label class="uk-form-label" for="password">Password</label>
+                <div class="uk-form-controls">
+                    <input class="uk-width-1-1" type="password" id="password" name="password" placeholder="Password" ng-model="password" required>
+                </div>
+            </div>
+            <div class="uk-form-row">
+                <label class="uk-form-label" for="fname">First Name</label>
+                <div class="uk-form-controls">
+                    <input class="uk-width-2-3" type="text" id="fname" name="fname" placeholder="First Name" ng-model="fname" required>
+                </div>
+            </div>
+            <div class="uk-form-row">
+                <label class="uk-form-label" for="lname">Last Name</label>
+                <div class="uk-form-controls">
+                    <input class="uk-width-2-3" type="text" id="lname" name="lname" placeholder="Last Name" ng-model="lname" required>
+                </div>
+            </div>
+
+            <div class="uk-form-row">
+                <button class="uk-button uk-button-primary" ng-click="signup()" ng-disabled="signupForm.$invalid">Submit</button>
+                <a href="/" class="uk-button" ng-click="closeModal()">Cancel</a>
+            </div>
+
+        </form>
+        </div>
+
+    </div>
+</div>

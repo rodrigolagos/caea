@@ -1,0 +1,39 @@
+<ul class="uk-breadcrumb uk-margin-top">
+    <li><a href="/">Mis cursos</a></li>
+    <li><a href="/course/{{ course.id }}">{{ course.title }}</a></li>
+    <li class="uk-active"><span>{{ topic.title }}</span></li>
+</ul>
+<h1>{{ topic.title }}</h1>
+<p>A continuación se muestran listados los materiales del tópico</p>
+<p class="uk-text-danger" ng-show="topic.materials.error">{{ topic.materials.error.message }}</p>
+
+<div ng-hide="topic.materials.error">
+    <ul id="my-id" class="uk-subnav uk-subnav-pill" ng-show="identity.isAuthorized('admin')">
+        <li data-uk-sort="my-category"><a href="#">Tipo 1</a></li>
+        <li data-uk-sort="my-category:desc"><a href="#">Tipo 2</a></li>
+    </ul>
+
+    <div class="uk-grid" data-uk-grid="{gutter: 20, controls: '#my-id'}">
+        <div class="uk-width-medium-1-3" ng-repeat="material in topic.materials" data-my-category="{{ material.id }}">
+            <div class="uk-panel-box">
+                <div class="uk-float-right uk-text-large" ng-show="material.type == 'image'"><a ng-click="viewMaterial('image', '/files/'+material.filename)"><i class="uk-icon-file-image-o"></i></a></div>
+                <div class="uk-float-right uk-text-large" ng-show="material.type == 'pdf'"><a ng-click="viewMaterial('pdf', '/pdf/'+material.filename)"><i class="uk-icon-file-pdf-o"></i></a></div>
+                <div class="uk-float-right uk-text-large" ng-show="material.type == 'video'"><a ng-click="viewMaterial('video', '/files/'+material.filename)"><i class="uk-icon-file-video-o"></i></a></div>
+                <h3 class="uk-panel-title">{{ material.title }}</h3>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ornare urna ac consectetur bibendum. Aenean vitae purus nec sapien pellentesque cursus. Nulla imperdiet nisl neque, aliquam volutpat lorem congue
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="modal-id" class="uk-modal">
+    <div class="uk-modal-dialog uk-modal-dialog-large">
+        <a class="uk-modal-close uk-close"></a>
+        <div class="uk-grid">
+            <div id="content" class="uk-width-medium-3-4 uk-width-small-1-1 uk-text-center"></div>
+            <div class="uk-width-medium-1-4 uk-width-small-1-1">
+                <h3>Comentarios</h3>
+            </div>
+        </div>
+    </div>
+</div>

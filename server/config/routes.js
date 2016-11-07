@@ -1,0 +1,56 @@
+var auth = require('../controllers/auth'),
+    users = require('../controllers/users'),
+    courses = require('../controllers/courses'),
+    topics = require('../controllers/topics'),
+    materials = require('../controllers/materials'),
+    multer = require('./multer');
+
+module.exports = function (app) {
+
+    app.get('/api/users', auth.requiresRole('admin'), users.getUsers);
+    app.post('/api/users', users.createUser);
+    app.get('/api/users/:id', auth.requiresRole('admin'), users.getUser);
+    app.put('/api/users/:id', auth.hasAuthorization, users.updateUser);
+
+    app.get('/api/courses', auth.requireAuthentication, courses.getCourses);
+    app.get('/api/courses/:id', auth.requireAuthentication, courses.getCourse);
+
+    app.get('/api/topics', auth.requireAuthentication, topics.getTopics);
+    app.get('/api/topics/:id', auth.requireAuthentication, topics.getTopic);
+    app.get('/api/courses/:courseId/topics', auth.requireAuthentication, topics.getTopicsByCourseId);
+
+    app.get('/api/materials', auth.requireAuthentication, materials.getMaterials);
+    app.post('/api/materials', auth.requiresRole('admin'), materials.createMaterial);
+    app.get('/api/courses/:courseId/topics/:topicId/materials', auth.requireAuthentication, materials.getMaterialsByTopicId);
+    app.get('/api/materials/:id', auth.requireAuthentication, materials.getMaterial);
+
+    app.post('/login', auth.authenticate);
+
+    app.post('/logout', auth.logout);
+    
+    app.all('/api/*', function (req, res) {
+        res.send(404);
+    });
+
+    app.post('/upload', function(req, res) {
+        multer.upload(req,res,function(err){
+            if(err){
+                res.json({error_code:1,err_desc:err});
+                return;
+            }
+            res.json({error_code:0,err_desc:null, filename: req.file.filename});
+        })
+    });
+
+    app.get('/files/*', auth.requireAuthentication);
+
+    app.get('/pdf/:fileName', function(req, res) {
+        res.render('pdf', { layout: 'layout-pdf', fileName: req.params.fileName });
+    });
+
+    app.get('*', function(req, res) {
+        res.render('index', {
+            bootstrappedUser: req.user
+        });
+    });
+}

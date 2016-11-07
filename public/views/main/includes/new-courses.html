@@ -1,0 +1,13 @@
+<div class="uk-panel uk-panel-box">
+    <h3 class="uk-panel-title">New Courses</h3>
+    <div ng-repeat="course in courses | orderBy:'published':true | limitTo:10">
+        <div class="uk-grid">
+            <div class="uk-width-3-10">
+                {{ course.published | date:'MMM d' }}
+            </div>
+            <div class="uk-width-7-10">
+                {{ course.title }}
+            </div>
+        </div>
+    </div>
+</div>

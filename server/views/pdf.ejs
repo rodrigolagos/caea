@@ -1,0 +1,5 @@
+<%- contentFor('mainContent') %>
+<pdfjs-viewer src="/files/<%= fileName %>" scale="scale"
+              download="true" fullscreen="true" print="false" open="false"
+              on-init="onInit()" on-page-load="onPageLoad(page)">
+</pdfjs-viewer>

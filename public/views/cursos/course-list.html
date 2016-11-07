@@ -1,0 +1,14 @@
+<div class="uk-float-right">
+    <form class="uk-form uk-margin-remove uk-display-inline-block">
+        <input placeholder="Filter" ng-model="searchText">
+        <select ng-model="sortOrder" ng-options="item.value as item.text for item in sortOptions"></select>
+    </form>
+</div>
+<h1>Cursos</h1>
+<p>A continuación se muestran listados los ramos inscritos</p>
+
+
+<div class="uk-panel uk-panel-box uk-margin-bottom" ng-repeat="course in courses | filter:searchText | orderBy:sortOrder">
+    <h3 class="uk-panel-title"><a class="uk-link-muted" href="/course/{{ course.id }}" ><i class="uk-icon-book"></i> {{ course.title }}</a></h3>
+    <p><b>Profesor:</b> Rodrigo Lagos</p>
+</div>

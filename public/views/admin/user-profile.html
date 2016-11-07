@@ -1,0 +1,28 @@
+<div class="uk-grid">
+    <div class="uk-width-medium-1-4">
+        <div ng-include="'views/admin/includes/sidenav-menu.html'"></div>
+    </div>
+
+    <div class="uk-width-medium-3-4">
+        <ul class="uk-breadcrumb uk-margin-top">
+            <li><a href="/admin">Administración</a></li>
+            <li><a href="/admin/users">Usuarios</a></li>
+            <li class="uk-active">{{ user.firstName }} {{ user.lastName }}</li>
+        </ul>
+        <h1 class="caea-title">{{ user.firstName }} {{ user.lastName }} <a class="uk-button uk-button-small" href="/admin/user/{{ user.id }}/editar"><i class="uk-icon-edit"></i> Editar</a></h1>
+        <table class="uk-table uk-table-striped">
+            <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Apellido</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>{{ user.firstName }}</td>
+                <td>{{ user.lastName }}</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
