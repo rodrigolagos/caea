@@ -46,7 +46,7 @@ angular.module('app').controller('caeaAdminMaterialUploadCtrl', function (Upload
                 };
                 vm.createMaterial(newMaterialData).then(function () {
                     caeaNotifier.success('Success ' + resp.config.data.file.name + 'uploaded. Response: ')
-                    $('#progress').removeClass('uk-active').addClass('uk-hidden');
+                    $('#progress').removeClass('uk-active');
                     $scope.name = '';
                     $scope.up.file = '';
                 }, function () {
