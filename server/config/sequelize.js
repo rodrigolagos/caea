@@ -92,9 +92,10 @@ sequelize
              db.Pregunta.create({pregunta: 'Aprendo mejor cuando...'});
          }
          });*/
+        console.log("Base de datos sincronizada correctamente");
     })
     .catch(function (err) {
-        console.log('Unable to connect to the database:', err);
+        console.log('Error al conectarse a la Base de datos:', err);
     });
 
 module.exports = _.extend({

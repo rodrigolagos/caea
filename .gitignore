@@ -2,3 +2,4 @@
 node_modules
 public/vendor
 server/config/config.js
+public/files
