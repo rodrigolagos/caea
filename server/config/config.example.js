@@ -6,11 +6,11 @@ module.exports = {
     development: {
         rootPath: rootPath,
         db: {
-            host: 'localhost',
-            name: 'caea_github',
-            user: 'root',
+            host: '',
+            name: '',
+            user: '',
             password: '',
-            dialect: 'mysql'
+            dialect: ''
         },
         port: process.env.PORT || 3030,
         modelsDir: rootPath + '/server/models'
@@ -18,11 +18,11 @@ module.exports = {
     production: {
         rootPath: rootPath,
         db: {
-            host: 'localhost',
-            name: 'CAEA',
-            user: 'root',
+            host: '',
+            name: '',
+            user: '',
             password: '',
-            dialect: 'mysql'
+            dialect: ''
         },
         port: process.env.PORT || 80,
         modelsDir: rootPath + '/server/models'
