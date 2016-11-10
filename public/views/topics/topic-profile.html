@@ -8,7 +8,7 @@
 <p class="uk-text-danger" ng-show="topic.materials.error">{{ topic.materials.error.message }}</p>
 
 <div ng-hide="topic.materials.error">
-    <ul id="my-id" class="uk-subnav uk-subnav-pill" ng-show="identity.isAuthorized('admin')">
+    <ul id="my-id" class="uk-subnav uk-subnav-pill" ng-show="identity.isAuthorized(1)">
         <li data-uk-sort="my-category"><a href="#">Tipo 1</a></li>
         <li data-uk-sort="my-category:desc"><a href="#">Tipo 2</a></li>
     </ul>

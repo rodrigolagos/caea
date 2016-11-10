@@ -3,10 +3,10 @@ angular.module('app', ['ngResource', 'ngRoute', 'countTo', 'ngFileUpload']);
 angular.module('app').config(function ($routeProvider, $locationProvider) {
     var auth = {
         isAdmin: {auth: function (caeaAuth) {
-            return caeaAuth.authorizeCurrentUserForRoute('admin')
+            return caeaAuth.authorizeCurrentUserForRoute(1)
         }},
         isUser: {auth: function (caeaAuth) {
-            return caeaAuth.authorizeCurrentUserForRoute('user')
+            return caeaAuth.authorizeCurrentUserForRoute(3)
         }},
         isAuthenticated: {auth: function (caeaAuth) {
             return caeaAuth.authorizeForRoute()

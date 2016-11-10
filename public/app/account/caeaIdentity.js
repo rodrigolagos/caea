@@ -10,7 +10,7 @@ angular.module('app').factory('caeaIdentity', function ($window, caeaUser) {
             return !!this.currentUser;
         },
         isAuthorized: function (role) {
-            return !!this.currentUser && this.currentUser.rol == role;
+            return !!this.currentUser && this.currentUser.rol_id == role;
         }
     }
 })

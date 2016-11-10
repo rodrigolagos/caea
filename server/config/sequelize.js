@@ -92,6 +92,73 @@ sequelize
              db.Pregunta.create({pregunta: 'Aprendo mejor cuando...'});
          }
          });*/
+        /*db.Alternativa.findAll().then(function(alternativas) {
+            if(alternativas.length === 0){
+                db.Alternativa.create({alternativa: 'me gusta vivir sensaciones', pregunta_id: 1, modalidad_id: 1});
+                db.Alternativa.create({alternativa: 'me gusta pensar sobre ideas', pregunta_id: 1, modalidad_id: 2});
+                db.Alternativa.create({alternativa: 'me gusta estar haciendo cosas', pregunta_id: 1, modalidad_id: 3});
+                db.Alternativa.create({alternativa: 'me gusta observar y escuchar', pregunta_id: 1, modalidad_id: 4});
+                db.Alternativa.create({alternativa: 'escucho y observo cuidadosamente', pregunta_id: 2, modalidad_id: 1});
+                db.Alternativa.create({alternativa: 'confío en el pensamiento lógico', pregunta_id: 2, modalidad_id: 2});
+                db.Alternativa.create({alternativa: 'confío en mi intuición y sentimientos', pregunta_id: 2, modalidad_id: 3});
+                db.Alternativa.create({alternativa: 'trabajo duro para lograr hacer las cosas', pregunta_id: 2, modalidad_id: 4});
+                db.Alternativa.create({alternativa: 'tiendo a usar el razonamiento', pregunta_id: 3, modalidad_id: 1});
+                db.Alternativa.create({alternativa: 'soy responsable con lo que hago', pregunta_id: 3, modalidad_id: 2});
+                db.Alternativa.create({alternativa: 'soy callado y reservado', pregunta_id: 3, modalidad_id: 3});
+                db.Alternativa.create({alternativa: 'tengo fuertes sensaciones y reacciones', pregunta_id: 3, modalidad_id: 4});
+                db.Alternativa.create({alternativa: 'sintiendo', pregunta_id: 4, modalidad_id: 1});
+                db.Alternativa.create({alternativa: 'haciendo', pregunta_id: 4, modalidad_id: 2});
+                db.Alternativa.create({alternativa: 'observando', pregunta_id: 4, modalidad_id: 3});
+                db.Alternativa.create({alternativa: 'pensando', pregunta_id: 4, modalidad_id: 4});
+                db.Alternativa.create({alternativa: 'estoy abierto a nuevas experiencias', pregunta_id: 5, modalidad_id: 1});
+                db.Alternativa.create({alternativa: 'observo todos los aspectos del asunto', pregunta_id: 5, modalidad_id: 2});
+                db.Alternativa.create({alternativa: 'me gusta analizar las cosas, descomponerlas en sus partes', pregunta_id: 5, modalidad_id: 3});
+                db.Alternativa.create({alternativa: 'me gusta probar e intentar hacer las cosas', pregunta_id: 5, modalidad_id: 4});
+                db.Alternativa.create({alternativa: 'soy una persona observadora', pregunta_id: 6, modalidad_id: 1});
+                db.Alternativa.create({alternativa: 'soy una persona activa', pregunta_id: 6, modalidad_id: 2});
+                db.Alternativa.create({alternativa: 'soy una persona intuitiva', pregunta_id: 6, modalidad_id: 3});
+                db.Alternativa.create({alternativa: 'soy una persona lógica', pregunta_id: 6, modalidad_id: 4});
+                db.Alternativa.create({alternativa: 'la observación', pregunta_id: 7, modalidad_id: 1});
+                db.Alternativa.create({alternativa: 'la relación con otras personas', pregunta_id: 7, modalidad_id: 2});
+                db.Alternativa.create({alternativa: 'las teorías racionales', pregunta_id: 7, modalidad_id: 3});
+                db.Alternativa.create({alternativa: 'la oportunidad de probar y practicar', pregunta_id: 7, modalidad_id: 4});
+                db.Alternativa.create({alternativa: 'me gusta ver los resultados de mi trabajo', pregunta_id: 8, modalidad_id: 1});
+                db.Alternativa.create({alternativa: 'me gustan las ideas y las teorías', pregunta_id: 8, modalidad_id: 2});
+                db.Alternativa.create({alternativa: 'me tomo mi tiempo antes de actuar', pregunta_id: 8, modalidad_id: 3});
+                db.Alternativa.create({alternativa: 'me siento personalmente involucrado en las cosas', pregunta_id: 8, modalidad_id: 4});
+                db.Alternativa.create({alternativa: 'confío en mis observaciones', pregunta_id: 9, modalidad_id: 1});
+                db.Alternativa.create({alternativa: 'confío en mis sentimientos', pregunta_id: 9, modalidad_id: 2});
+                db.Alternativa.create({alternativa: 'puedo probar por mi cuenta', pregunta_id: 9, modalidad_id: 3});
+                db.Alternativa.create({alternativa: 'confío en mis ideas', pregunta_id: 9, modalidad_id: 4});
+                db.Alternativa.create({alternativa: 'soy una persona reservada', pregunta_id: 10, modalidad_id: 1});
+                db.Alternativa.create({alternativa: 'soy una persona receptiva', pregunta_id: 10, modalidad_id: 2});
+                db.Alternativa.create({alternativa: 'soy una persona responsable', pregunta_id: 10, modalidad_id: 3});
+                db.Alternativa.create({alternativa: 'soy una persona racional', pregunta_id: 10, modalidad_id: 4});
+                db.Alternativa.create({alternativa: 'me involucro', pregunta_id: 11, modalidad_id: 1});
+                db.Alternativa.create({alternativa: 'me gusta observar', pregunta_id: 11, modalidad_id: 2});
+                db.Alternativa.create({alternativa: 'evalúo las cosas', pregunta_id: 11, modalidad_id: 3});
+                db.Alternativa.create({alternativa: 'me gusta ser activo', pregunta_id: 11, modalidad_id: 4});
+                db.Alternativa.create({alternativa: 'analizo ideas', pregunta_id: 12, modalidad_id: 1});
+                db.Alternativa.create({alternativa: 'soy receptivo y abierto', pregunta_id: 12, modalidad_id: 2});
+                db.Alternativa.create({alternativa: 'soy cuidadoso', pregunta_id: 12, modalidad_id: 3});
+                db.Alternativa.create({alternativa: 'soy práctico', pregunta_id: 12, modalidad_id: 4});
+            }
+        });*/
+        db.Student_Type.findAll().then(function(student_types) {
+             if(student_types.length === 0){
+                 db.Student_Type.create({id: 1, tipo_aprendizaje: 'Divergente'});
+                 db.Student_Type.create({id: 2, tipo_aprendizaje: 'Asimilador'});
+                 db.Student_Type.create({id: 3, tipo_aprendizaje: 'Adaptador'});
+                 db.Student_Type.create({id: 4, tipo_aprendizaje: 'Convergente'});
+             }
+         });
+        db.User_Role.findAll().then(function(user_roles) {
+            if(user_roles.length === 0){
+                db.User_Role.create({id: 1, rol: 'Coordinador'});
+                db.User_Role.create({id: 2, rol: 'Profesor'});
+                db.User_Role.create({id: 3, rol: 'Estudiante'});
+            }
+        });
         console.log("Base de datos sincronizada correctamente");
     })
     .catch(function (err) {

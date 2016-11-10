@@ -47,7 +47,7 @@ exports.requiresApiLogin = function (req, res, next) {
 };
 
 exports.hasAuthorization = function(req, res, next) {
-    if (req.body.id !== req.user.id && req.user.rol != 'admin') {
+    if (req.body.id !== req.user.id && req.user.rol_id != 1) {
         return res.send(401, 'User is not authorized');
     }
     next();
@@ -55,7 +55,7 @@ exports.hasAuthorization = function(req, res, next) {
 
 exports.requiresRole = function (role) {
     return function (req, res, next) {
-        if(!req.isAuthenticated() || req.user.rol != role) {
+        if(!req.isAuthenticated() || req.user.rol_id != role) {
             res.status(403);
             res.send({
                 error: {

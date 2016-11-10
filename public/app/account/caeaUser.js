@@ -4,7 +4,7 @@ angular.module('app').factory('caeaUser', function ($resource) {
     });
 
     UserResource.prototype.isAdmin = function () {
-        return this.rol == 'admin';
+        return this.rol_id == 1;
     }
 
     return UserResource;

@@ -3,13 +3,16 @@ var auth = require('../controllers/auth'),
     courses = require('../controllers/courses'),
     topics = require('../controllers/topics'),
     materials = require('../controllers/materials'),
+    preguntas = require('../controllers/preguntas'),
+    alternativas = require('../controllers/alternativas'),
+    students = require('../controllers/students'),
     multer = require('./multer');
 
 module.exports = function (app) {
 
-    app.get('/api/users', auth.requiresRole('admin'), users.getUsers);
+    app.get('/api/users', auth.requiresRole(1), users.getUsers);
     app.post('/api/users', users.createUser);
-    app.get('/api/users/:id', auth.requiresRole('admin'), users.getUser);
+    app.get('/api/users/:id', auth.requiresRole(1), users.getUser);
     app.put('/api/users/:id', auth.hasAuthorization, users.updateUser);
 
     app.get('/api/courses', auth.requireAuthentication, courses.getCourses);
@@ -20,9 +23,14 @@ module.exports = function (app) {
     app.get('/api/courses/:courseId/topics', auth.requireAuthentication, topics.getTopicsByCourseId);
 
     app.get('/api/materials', auth.requireAuthentication, materials.getMaterials);
-    app.post('/api/materials', auth.requiresRole('admin'), materials.createMaterial);
+    app.post('/api/materials', auth.requiresRole(1), materials.createMaterial);
     app.get('/api/courses/:courseId/topics/:topicId/materials', auth.requireAuthentication, materials.getMaterialsByTopicId);
     app.get('/api/materials/:id', auth.requireAuthentication, materials.getMaterial);
+
+    app.get('/api/preguntas', preguntas.getPreguntas);
+    app.get('/api/alternativas', alternativas.getAlternativas);
+
+    app.post('/api/students', students.createStudent);
 
     app.post('/login', auth.authenticate);
 

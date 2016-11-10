@@ -2,16 +2,16 @@
     <img src="/img/header-usm.png" alt="CAEA" class="uk-margin-bottom">
     <nav class="uk-navbar uk-margin-bottom">
         <ul class="uk-navbar-nav uk-hidden-small">
-            <li ng-class="{ 'uk-active': isActive('/')}" ng-show="identity.isAuthorized('user')">
+            <li ng-class="{ 'uk-active': isActive('/')}" ng-show="identity.isAuthorized(3)">
                 <a href="/" class="uk-navbar-nav-subtitle">
                     Mis Cursos
                     <div>Cursos inscritos</div>
                 </a>
             </li>
-            <li ng-class="{ 'uk-active': isActive('/') }" ng-show="identity.isAuthorized('admin')">
+            <li ng-class="{ 'uk-active': isActive('/') }" ng-show="identity.isAuthorized(1)">
                 <a style="border-top-left-radius: 4px; border-bottom-left-radius: 4px" href="/">Inicio</a>
             </li>
-            <li ng-class="{'uk-active': $route.current.parent == 'admin'}" ng-show="identity.isAuthorized('admin')">
+            <li ng-class="{'uk-active': $route.current.parent == 'admin'}" ng-show="identity.isAuthorized(1)">
                 <a href="/admin">Administración</a>
             </li>
         </ul>
@@ -24,13 +24,13 @@
     <div id="off-canvas" class="uk-offcanvas">
         <div class="uk-offcanvas-bar">
             <ul class="uk-nav uk-nav-offcanvas">
-                <li ng-class="{ 'uk-active': isActive('/')}" ng-show="identity.isAuthorized('user')">
+                <li ng-class="{ 'uk-active': isActive('/')}" ng-show="identity.isAuthorized(3)">
                     <a href="/">Mis cursos</a>
                 </li>
-                <li ng-class="{ 'uk-active': isActive('/')}" ng-show="identity.isAuthorized('admin')">
+                <li ng-class="{ 'uk-active': isActive('/')}" ng-show="identity.isAuthorized(1)">
                     <a href="/">Inicio</a>
                 </li>
-                <li ng-class="{'uk-active': $route.current.parent == 'admin'}" ng-show="identity.isAuthorized('admin')">
+                <li ng-class="{'uk-active': $route.current.parent == 'admin'}" ng-show="identity.isAuthorized(1)">
                     <a href="/admin">Administracion</a>
                 </li>
             </ul>

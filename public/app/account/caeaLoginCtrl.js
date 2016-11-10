@@ -4,7 +4,7 @@ angular.module('app').controller('caeaLoginCtrl', function ($scope, $http, caeaI
         caeaAuth.authenticateUser(username, password).then(function (response) {
             if(response.success) {
                 caeaNotifier.success(response.msg);
-                if(caeaIdentity.currentUser.rol == 'admin') {
+                if(caeaIdentity.currentUser.rol_id == 1) {
                     $location.path('/admin');
                 } else {
                     $location.path('/')

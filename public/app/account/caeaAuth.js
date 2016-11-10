@@ -15,9 +15,21 @@ angular.module('app').factory('caeaAuth', function ($http, caeaIdentity, $q, cae
             return dfd.promise;
         },
         createUser: function (newUserData) {
+            var tipo_id = newUserData.tipo_id;
             var newUser = new caeaUser(newUserData);
             var dfd = $q.defer();
-            newUser.$save().then(function () {
+            newUser.$save().then(function (user) {
+                if(newUser.rol_id==3) {
+                    var newStudent = {
+                        user_id: user.id,
+                        tipo_id: tipo_id
+                    };
+                    $http.post('/api/students', newStudent).then(function () {
+                        console.log('Estudiante creado');
+                    }, function () {
+                        console.log('Error al crear estudiante');
+                    });
+                }
                 caeaIdentity.currentUser = newUser;
                 dfd.resolve();
             }, function (response) {
