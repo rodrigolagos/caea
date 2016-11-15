@@ -8,7 +8,9 @@
 <p>A continuación se muestran listados los ramos inscritos</p>
 
 
-<div class="uk-panel uk-panel-box uk-margin-bottom" ng-repeat="course in courses | filter:searchText | orderBy:sortOrder">
+<div class="uk-panel uk-panel-box uk-margin-bottom" dir-paginate="course in courses | filter:searchText | orderBy:sortOrder | itemsPerPage: 5">
     <h3 class="uk-panel-title"><a class="uk-link-muted" href="/course/{{ course.id }}" ><i class="uk-icon-book"></i> {{ course.title }}</a></h3>
     <p><b>Profesor:</b> Rodrigo Lagos</p>
 </div>
+
+<dir-pagination-controls></dir-pagination-controls>

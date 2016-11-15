@@ -1,6 +1,7 @@
-angular.module('app', ['ngResource', 'ngRoute', 'countTo', 'ngFileUpload']);
+angular.module('app', ['ngResource', 'ngRoute', 'countTo', 'ngFileUpload', 'angularUtils.directives.dirPagination']);
 
-angular.module('app').config(function ($routeProvider, $locationProvider) {
+angular.module('app').config(function ($routeProvider, $locationProvider, paginationTemplateProvider) {
+    paginationTemplateProvider.setPath('/views/common/includes/dirPagination.html');
     var auth = {
         isAdmin: {auth: function (caeaAuth) {
             return caeaAuth.authorizeCurrentUserForRoute(1)
