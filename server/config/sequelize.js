@@ -3,6 +3,7 @@ var Sequelize = require('sequelize'),
     path = require('path'),
     _ = require('lodash'),
     db = {};
+    encrypt = require('../utilities/encryption');
 
 var env = process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 var config = require('./config')[env];
@@ -39,7 +40,7 @@ Object.keys(db).forEach(function (modelName) {
 sequelize
     .sync({ force: false })
     .then(function() {
-        /*db.Course.findAll().then(function(courses) {
+        db.Course.findAll().then(function(courses) {
             if(courses.length === 0){
                 db.Course.create({title: 'C# for Sociopaths', featured: true, published: new Date('10/5/2013')});
                 db.Course.create({title: 'C# for Non-Sociopaths', featured: true, published: new Date('10/12/2013')});
@@ -57,8 +58,8 @@ sequelize
                 db.Course.create({title: 'How to Deal with Narcissistic Coworkers', featured: true, published: new Date('2/15/2013')});
                 db.Course.create({title: 'Death March Coding for Fun and Profit', featured: true, published: new Date('7/1/2013')});
             }
-        })*/
-        /*db.Topic.findAll().then(function(topics) {
+        })
+        db.Topic.findAll().then(function(topics) {
              if(topics.length === 0){
                  db.Topic.create({title: 'Campo Eléctrico', course_id: 1});
                  db.Topic.create({title: 'Campo Magnético', course_id: 1});
@@ -66,8 +67,8 @@ sequelize
                  db.Topic.create({title: 'Potencial Eléctrico', course_id: 1});
                  db.Topic.create({title: 'Densidad de Corriente', course_id: 1});
              }
-         })*/
-        /*db.Material.findAll().then(function(materials) {
+         })
+        db.Material.findAll().then(function(materials) {
              if(materials.length === 0){
                  db.Material.create({title: 'Material 1', topic_id: 1, type: 'pdf'});
                  db.Material.create({title: 'Material 2', topic_id: 1, type: 'image'});
@@ -75,8 +76,8 @@ sequelize
                  db.Material.create({title: 'Material 4', topic_id: 1, type: 'image'});
                  db.Material.create({title: 'Material 5', topic_id: 1, type: 'pdf'});
              }
-         })*/
-        /*db.Pregunta.findAll().then(function(preguntas) {
+         })
+        db.Pregunta.findAll().then(function(preguntas) {
          if(preguntas.length === 0){
              db.Pregunta.create({pregunta: 'Cuando aprendo...'});
              db.Pregunta.create({pregunta: 'Aprendo mejor cuando...'});
@@ -91,8 +92,16 @@ sequelize
              db.Pregunta.create({pregunta: 'Cuando aprendo...'});
              db.Pregunta.create({pregunta: 'Aprendo mejor cuando...'});
          }
-         });*/
-        /*db.Alternativa.findAll().then(function(alternativas) {
+         });
+        db.Modalidad.findAll().then(function(modalidades) {
+         if(modalidades.length === 0){
+             db.Modalidad.create({nombre: 'EC'});
+             db.Modalidad.create({nombre: 'OR'});
+             db.Modalidad.create({nombre: 'CA'});
+             db.Modalidad.create({nombre: 'EA'});
+         }
+        });
+        db.Alternativa.findAll().then(function(alternativas) {
             if(alternativas.length === 0){
                 db.Alternativa.create({alternativa: 'me gusta vivir sensaciones', pregunta_id: 1, modalidad_id: 1});
                 db.Alternativa.create({alternativa: 'me gusta pensar sobre ideas', pregunta_id: 1, modalidad_id: 2});
@@ -143,7 +152,7 @@ sequelize
                 db.Alternativa.create({alternativa: 'soy cuidadoso', pregunta_id: 12, modalidad_id: 3});
                 db.Alternativa.create({alternativa: 'soy práctico', pregunta_id: 12, modalidad_id: 4});
             }
-        });*/
+        });
         db.Student_Type.findAll().then(function(student_types) {
              if(student_types.length === 0){
                  db.Student_Type.create({id: 1, tipo_aprendizaje: 'Divergente'});
@@ -159,6 +168,15 @@ sequelize
                 db.User_Role.create({id: 3, rol: 'Estudiante'});
             }
         });
+        db.User.findAll().then(function(users) {
+            if(users.length === 0){
+                var password = '123456';
+                var salt = encrypt.createSalt();
+                var hashed_pwd = encrypt.hashPwd(salt, password);
+                db.User.create({firstName: 'Rodrigo', lastName: 'Lagos', username: 'admin', email: 'admin@admin.com', salt: salt, hashed_pwd: hashed_pwd, rol_id: 1});
+            }
+        });
+
         console.log("Base de datos sincronizada correctamente");
     })
     .catch(function (err) {
