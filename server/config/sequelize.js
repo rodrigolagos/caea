@@ -68,7 +68,7 @@ sequelize
                  db.Topic.create({title: 'Densidad de Corriente', course_id: 1});
              }
          })
-        db.Material.findAll().then(function(materials) {
+        /*db.Material.findAll().then(function(materials) {
              if(materials.length === 0){
                  db.Material.create({title: 'Material 1', topic_id: 1, type: 'pdf'});
                  db.Material.create({title: 'Material 2', topic_id: 1, type: 'image'});
@@ -76,7 +76,7 @@ sequelize
                  db.Material.create({title: 'Material 4', topic_id: 1, type: 'image'});
                  db.Material.create({title: 'Material 5', topic_id: 1, type: 'pdf'});
              }
-         })
+         })*/
         db.Pregunta.findAll().then(function(preguntas) {
          if(preguntas.length === 0){
              db.Pregunta.create({pregunta: 'Cuando aprendo...'});
