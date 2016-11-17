@@ -35,7 +35,10 @@ Instalar librerías públicas del proyecto
 ```
 bower install
 ```
-
+* En linux ejecutar el siguiente comando para poder utilizar bower:
+    ```
+    sudo ln -s /usr/bin/nodejs /usr/bin/node
+    ```
 * Puede ser que al instalar las librerías públicas el instalador pregunte por la version de jquery que se desea instalar, escoger la opción 3 y pulsar enter.
 
 Editar el archivo “server/config/config.example.js”
