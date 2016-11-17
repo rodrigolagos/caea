@@ -41,7 +41,9 @@ Editar el archivo “server/config/config.example.js”
 + Establecer los datos de la conexión mysql
 + Guardar el archivo como "config.js"
 
-Ejecutar el software
+Ejecutar el proyecto
 ```
 node server.js
 ```
+
+Visualizar el proyecto en el navegador con la dirección http://localhost:3030
