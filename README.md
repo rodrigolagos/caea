@@ -36,6 +36,8 @@ Instalar librerías públicas del proyecto
 bower install
 ```
 
+* Puede ser que al instalar las librerías públicas el instalador pregunte por la version de jquery que se desea instalar, escoger la opción 3 y pulsar enter.
+
 Editar el archivo “server/config/config.example.js”
 
 + Establecer los datos de la conexión mysql
