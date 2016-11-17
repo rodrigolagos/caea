@@ -49,3 +49,12 @@ node server.js
 ```
 
 Visualizar el proyecto en el navegador con la dirección http://localhost:3030
+
+##Post-instalación
+
+Para ingresar al sistema como Administrador utilizar las siguientes credenciales:
+```
+username: admin
+password: 123456
+```
+
