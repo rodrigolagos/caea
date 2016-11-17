@@ -10,7 +10,7 @@ module.exports = {
             name: '',
             user: '',
             password: '',
-            dialect: ''
+            dialect: 'mysql'
         },
         port: process.env.PORT || 3030,
         modelsDir: rootPath + '/server/models'
