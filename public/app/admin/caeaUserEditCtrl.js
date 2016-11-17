@@ -1,7 +1,7 @@
 angular.module('app').controller('caeaUserEditCtrl', function ($scope, caeaUser, $routeParams, caeaAuth, caeaNotifier) {
     var userObject;
     $scope.user = caeaUser.get({id:$routeParams.userId}, function (user) {
-        $scope.email = user.username;
+        $scope.email = user.email;
         $scope.fname = user.firstName;
         $scope.lname = user.lastName;
         userObject = user;
@@ -9,7 +9,7 @@ angular.module('app').controller('caeaUserEditCtrl', function ($scope, caeaUser,
 
     $scope.update = function () {
         var newUserData = {
-            username: $scope.email,
+            email: $scope.email,
             firstName: $scope.fname,
             lastName: $scope.lname
         }
