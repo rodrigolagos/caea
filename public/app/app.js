@@ -6,6 +6,13 @@ angular.module('app').config(function ($routeProvider, $locationProvider, pagina
         isAdmin: {auth: function (caeaAuth) {
             return caeaAuth.authorizeCurrentUserForRoute(1)
         }},
+        isAdminOrStudentOrValidatedTeacher: {auth: function (caeaAuth, $q) {
+            if(caeaAuth.authorizeCurrentUserForRoute(1) || caeaAuth.authorizeCurrentUserForRoute(3)){
+                return true;
+            } else {
+                return $q.reject('not authorized');
+            }
+        }},
         isUser: {auth: function (caeaAuth) {
             return caeaAuth.authorizeCurrentUserForRoute(3)
         }},
@@ -21,7 +28,7 @@ angular.module('app').config(function ($routeProvider, $locationProvider, pagina
     $routeProvider
         .when('/', {
             templateUrl: 'views/cursos/course-list.html',
-            controller: 'caeaCourseListCtrl', resolve: auth.isAuthenticated
+            controller: 'caeaCourseListCtrl', resolve: auth.isAdminOrStudentOrValidatedTeacher
         })
         .when('/course/:courseId', {
             templateUrl: 'views/cursos/course-profile.html',

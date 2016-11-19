@@ -168,6 +168,12 @@ sequelize
                 db.User_Role.create({id: 3, rol: 'Estudiante'});
             }
         });
+        db.Request_Status.findAll().then(function(request_statuses) {
+            if(request_statuses.length === 0){
+                db.Request_Status.create({id: 1, estado: 'Validada'});
+                db.Request_Status.create({id: 2, estado: 'No Validada'});
+            }
+        });
         db.User.findAll().then(function(users) {
             if(users.length === 0){
                 var password = '123456';

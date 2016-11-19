@@ -1,88 +1,24 @@
 <div class="uk-container uk-margin-large-top">
-    <div class="uk-container-center uk-width-medium-2-3">
+    <div class="uk-container-center uk-width-small-1-1 uk-width-medium-4-5">
 
         <div class="uk-text-center">
             <img width="140" height="120" src="/img/logo-usm.png" alt="">
             <h2 class="uk-text-center" style="margin-top: 0px">CAEA</h2>
         </div>
 
-        <div class="uk-panel uk-panel-box">
-            <form class="uk-form uk-form-horizontal" name="signupForm" ng-controller="caeaSignupCtrl">
-                <div class="uk-form-row">
-                    <label class="uk-form-label" for="fname">Nombre</label>
-                    <div class="uk-form-controls">
-                        <input class="uk-width-2-3" type="text" id="fname" name="fname" placeholder="First Name" ng-model="fname" required>
-                    </div>
-                </div>
-                <div class="uk-form-row">
-                    <label class="uk-form-label" for="lname">Apellido</label>
-                    <div class="uk-form-controls">
-                        <input class="uk-width-2-3" type="text" id="lname" name="lname" placeholder="Last Name" ng-model="lname" required>
-                    </div>
-                </div>
-                <div class="uk-form-row">
-                    <label class="uk-form-label" for="username">Email</label>
-                    <div class="uk-form-controls">
-                        <input class="uk-width-2-5" type="text" id="username" name="username" placeholder="nombre.apellido" ng-model="username" required>
-                        <select id="select-mail" class="uk-width-2-5">
-                            <option value="@usm.cl">@usm.cl</option>
-                            <option value="@sansano.usm.cl">@sansano.usm.cl</option>
-                            <option value="@alumnos.usm.cl">@alumnos.usm.cl</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="uk-form-row">
-                    <label class="uk-form-label" for="password">Password</label>
-                    <div class="uk-form-controls">
-                        <div class="uk-form-password">
-                            <input type="password" id="password" name="password" placeholder="Password" ng-model="password" required>
-                            <a href="" class="uk-form-password-toggle" data-uk-form-password="{lblShow:'Mostrar', lblHide:'Ocultar'}">Mostrar</a>
-                        </div>
-                    </div>
-                </div>
+        <ul class="uk-tab" data-uk-tab="{connect:'#register-content'}">
+            <li class="uk-active"><a href="">Registrarse como estudiante</a></li>
+            <li><a href="">Registrarse como profesor</a></li>
+        </ul>
 
-                <div class="uk-panel uk-panel-box uk-panel-box-primary uk-margin-top">
-                    <h3>Encuesta </h3>
-                    <h4>Instrucciones</h4>
-                    <p>En la siguiente encuesta se te pide que completes 12 frases. Cada frase puede terminarse de cuatro formas distintas. Ordena las cuatro opciones de cada frase según pienses que se ajustan a tu manera de aprender algo nuevo, tal vez en tu trabajo. Trata de pensar en situaciones recientes en las que te enfrentaste con algo nuevo. Numera con un 4 la terminación que más se ajuste a tu forma de aprender y con un 1 la que peor se ajuste. Asegúrate de asignar un número a todas las terminaciones de cada una de las 12 frases.</p>
-                    <h4>Recuerde:</h4>
-                    <p class="margin-left">4 = Lo que más se parece a ti <br> 3 = Lo segundo que más se parece a ti <br> 2 = Lo tercero que más se parece a ti <br>
-                        1 = Lo que menos se parece a ti</p>
-                    <div class="uk-margin-top uk-panel uk-panel-box uk-panel-box-secondary" data-uk-slideshow="{animation:'scroll'}">
-                        <div class="uk-slidenav-position">
-                            <ul class="uk-slideshow">
-                                <li ng-repeat="pregunta in preguntas">
-                                    <div class="uk-form-row">
-                                        <label class="uk-form-label uk-text-bold">{{ pregunta.id }}. {{ pregunta.pregunta }}</label>
-                                        <div ng-repeat="alternativa in alternativas" class="uk-form-controls uk-margin-small-bottom">
-                                            <div ng-if="alternativa.pregunta_id == pregunta.id">
-                                                <select class="{{ alternativa.modalidad_id }} uk-margin-right">
-                                                    <option value="1">1</option>
-                                                    <option value="2">2</option>
-                                                    <option value="3">3</option>
-                                                    <option value="4">4</option>
-                                                </select>
-                                                {{ alternativa.alternativa }}
-                                            </div>
-                                        </div>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                        <ul class="uk-dotnav uk-flex-center uk-margin-small-top">
-                            <a href="" style="font-size: 20px" class="uk-icon-chevron-left uk-link-muted" data-uk-slideshow-item="previous"></a>
-                            <li class="uk-hidden-small" ng-repeat="pregunta in preguntas" data-uk-slideshow-item="{{ pregunta.id-1}}"><a href=""></a></li>
-                            <a href="" style="font-size: 20px" class="uk-icon-chevron-right uk-link-muted" data-uk-slideshow-item="next"></a>
-                        </ul>
-                    </div>
-
-                </div>
-                <div class="uk-form-row uk-margin-top">
-                    <button class="uk-button uk-button-primary" ng-click="signup()" ng-disabled="signupForm.$invalid">Submit</button>
-                    <a href="/" class="uk-button" ng-click="closeModal()">Cancel</a>
-                </div>
-            </form>
-        </div>
+        <ul id="register-content" class="uk-switcher">
+            <li>
+                <div ng-include="'views/account/includes/student-register.html'"></div>
+            </li>
+            <li>
+                <div ng-include="'views/account/includes/teacher-register.html'"></div>
+            </li>
+        </ul>
 
     </div>
 </div>

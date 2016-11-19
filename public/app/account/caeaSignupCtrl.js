@@ -1,7 +1,8 @@
 angular.module('app').controller('caeaSignupCtrl', function ($scope, caeaUser, caeaNotifier, $location, caeaAuth, caeaPregunta, caeaAlternativa) {
     $scope.preguntas = caeaPregunta.query();
     $scope.alternativas = caeaAlternativa.query();
-    $scope.signup = function () {
+    $scope.solicitud = "Nombre Completo:\nSoy profesor de\nTrabajo en\nMi motivación para unirme a esta plataforma es"
+    $scope.studentSignup = function () {
         var newUserData = {
             firstName: $scope.fname,
             lastName: $scope.lname,
@@ -10,6 +11,24 @@ angular.module('app').controller('caeaSignupCtrl', function ($scope, caeaUser, c
             rol_id: 3,
             password: $scope.password,
             tipo_id: calcularTipo()
+        };
+
+        caeaAuth.createUser(newUserData).then(function () {
+            caeaNotifier.success('User account created!');
+            $location.path('/');
+        }, function (reason) {
+            caeaNotifier.error(reason);
+        })
+    };
+    $scope.teacherSignup = function () {
+        var newUserData = {
+            firstName: $scope.fname,
+            lastName: $scope.lname,
+            email: $scope.email,
+            username: $scope.username,
+            rol_id: 2,
+            password: $scope.password,
+            solicitud: $scope.solicitud
         };
 
         caeaAuth.createUser(newUserData).then(function () {

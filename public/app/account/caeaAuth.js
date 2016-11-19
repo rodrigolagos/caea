@@ -15,19 +15,39 @@ angular.module('app').factory('caeaAuth', function ($http, caeaIdentity, $q, cae
             return dfd.promise;
         },
         createUser: function (newUserData) {
-            var tipo_id = newUserData.tipo_id;
             var newUser = new caeaUser(newUserData);
             var dfd = $q.defer();
             newUser.$save().then(function (user) {
                 if(newUser.rol_id==3) {
                     var newStudent = {
                         user_id: user.id,
-                        tipo_id: tipo_id
+                        tipo_id: newUserData.tipo_id
                     };
                     $http.post('/api/students', newStudent).then(function () {
                         console.log('Estudiante creado');
                     }, function () {
                         console.log('Error al crear estudiante');
+                    });
+                }
+                if(newUser.rol_id==2) {
+                    var newTeacher = {
+                        user_id: user.id,
+                        validado: 0
+                    };
+                    $http.post('/api/teachers', newTeacher).then(function (teacher) {
+                        console.log('Profesor creado');
+                        var newValidationRequest = {
+                            contenido: newUserData.solicitud,
+                            estado_id: 1,
+                            profesor_id: teacher.data.id
+                        };
+                        $http.post('/api/validation-requests', newValidationRequest).then(function () {
+                            console.log('Solicitud de validacion creada');
+                        }, function () {
+                            console.log('Error al crear solicitud de validacion')
+                        })
+                    }, function () {
+                        console.log('Error al crear profesor');
                     });
                 }
                 caeaIdentity.currentUser = newUser;
@@ -76,14 +96,14 @@ angular.module('app').factory('caeaAuth', function ($http, caeaIdentity, $q, cae
             if(caeaIdentity.isAuthorized(role)) {
                 return true;
             } else {
-                return $q.reject('not authorized');
+                return false;
             }
         },
         authorizeForRoute: function () {
             if(caeaIdentity.isAuthenticated()) {
                 return true;
             } else {
-                return $q.reject('not authorized');
+                return false;
             }
         },
         authorizeForNotLoggedUser: function () {

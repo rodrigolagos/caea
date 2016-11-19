@@ -6,6 +6,8 @@ var auth = require('../controllers/auth'),
     preguntas = require('../controllers/preguntas'),
     alternativas = require('../controllers/alternativas'),
     students = require('../controllers/students'),
+    teachers = require('../controllers/teachers'),
+    validation_requests = require('../controllers/validation_requests'),
     multer = require('./multer');
 
 module.exports = function (app) {
@@ -31,6 +33,10 @@ module.exports = function (app) {
     app.get('/api/alternativas', alternativas.getAlternativas);
 
     app.post('/api/students', students.createStudent);
+
+    app.post('/api/teachers', teachers.createTeacher);
+
+    app.post('/api/validation-requests', validation_requests.createValidationRequest);
 
     app.post('/login', auth.authenticate);
 
