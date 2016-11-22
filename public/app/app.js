@@ -64,6 +64,11 @@ angular.module('app').config(function ($routeProvider, $locationProvider, pagina
             controller: 'caeaUserListCtrl', resolve: auth.isAdmin,
             parent: 'admin', subparent: 'admin/users'
         })
+        .when('/admin/user/crear', {
+            templateUrl: 'views/admin/user-create.html',
+            controller: 'caeaAdminUserCreateCtrl', resolve: auth.isAdmin,
+            parent: 'admin', subparent: 'admin/users'
+        })
         .when('/admin/user/:userId', {
             templateUrl: 'views/admin/user-profile.html',
             controller: 'caeaUserProfileCtrl', resolve: auth.isAdmin,

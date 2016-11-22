@@ -17,7 +17,6 @@
         <ul class="uk-sortable uk-grid uk-grid-small uk-grid-width-1-4" data-uk-sortable="{handleClass:'uk-panel'}">
             <li data-id="{{ material.id }}" class="uk-grid-margin" ng-repeat="material in topic.materials | orderBy:tipoAprendizaje">
                 <div class="uk-panel uk-panel-box">
-                    <div class="uk-badge uk-badge-notification uk-panel-badge">0</div>
                     {{ material.titulo }}
                 </div>
             </li>

@@ -30,27 +30,42 @@ angular.module('app').factory('caeaAuth', function ($http, caeaIdentity, $q, cae
                     });
                 }
                 if(newUser.rol_id==2) {
+                    var teacher_validation;
+                    if(newUserData.byAdmin) {
+                        teacher_validation = 1;
+                    } else {
+                        teacher_validation = 0;
+                    }
                     var newTeacher = {
                         user_id: user.id,
-                        validado: 0
+                        validado: teacher_validation
                     };
                     $http.post('/api/teachers', newTeacher).then(function (teacher) {
                         console.log('Profesor creado');
-                        var newValidationRequest = {
-                            contenido: newUserData.solicitud,
-                            estado_id: 1,
-                            profesor_id: teacher.data.id
-                        };
-                        $http.post('/api/validation-requests', newValidationRequest).then(function () {
-                            console.log('Solicitud de validacion creada');
-                        }, function () {
-                            console.log('Error al crear solicitud de validacion')
-                        })
+                        if(newUserData.solicitud!=undefined) {
+                            if(newUserData.byAdmin) {
+                                estado_validacion = 1
+                            } else {
+                                estado_validacion = 2
+                            }
+                            var newValidationRequest = {
+                                contenido: newUserData.solicitud,
+                                estado_id: estado_validacion,
+                                profesor_id: teacher.data.id
+                            };
+                            $http.post('/api/validation-requests', newValidationRequest).then(function () {
+                                console.log('Solicitud de validacion creada');
+                            }, function () {
+                                console.log('Error al crear solicitud de validacion')
+                            })
+                        }
                     }, function () {
                         console.log('Error al crear profesor');
                     });
                 }
-                caeaIdentity.currentUser = newUser;
+                if(!newUserData.byAdmin){
+                    caeaIdentity.currentUser = newUser;
+                }
                 dfd.resolve();
             }, function (response) {
                 dfd.reject(response.data.reason);

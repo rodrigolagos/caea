@@ -1,0 +1,27 @@
+<div class="uk-grid">
+    <div class="uk-width-medium-1-4">
+        <div ng-include="'views/admin/includes/sidenav-menu.html'"></div>
+    </div>
+
+    <div class="uk-width-medium-3-4">
+        <ul class="uk-breadcrumb uk-margin-top">
+            <li><a href="/admin">Administración</a></li>
+            <li><a href="/admin/users">Usuarios</a></li>
+            <li class="uk-active">Crear usuario</li>
+        </ul>
+        <h1 class="caea-title">Crear usuario</h1>
+        <ul class="uk-tab" data-uk-tab="{connect:'#register-content'}">
+            <li class="uk-active"><a href="">Crear estudiante</a></li>
+            <li><a href="">Crear profesor</a></li>
+        </ul>
+
+        <ul id="register-content" class="uk-switcher">
+            <li>
+                <div ng-include="'views/admin/includes/student-create.html'"></div>
+            </li>
+            <li>
+                <div ng-include="'views/admin/includes/teacher-create.html'"></div>
+            </li>
+        </ul>
+    </div>
+</div>

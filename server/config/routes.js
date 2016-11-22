@@ -16,6 +16,7 @@ module.exports = function (app) {
     app.post('/api/users', users.createUser);
     app.get('/api/users/:id', auth.requiresRole(1), users.getUser);
     app.put('/api/users/:id', auth.hasAuthorization, users.updateUser);
+    app.delete('/api/users/:id', auth.hasAuthorization, users.deleteUser);
 
     app.get('/api/courses', auth.requireAuthentication, courses.getCourses);
     app.get('/api/courses/:id', auth.requireAuthentication, courses.getCourse);

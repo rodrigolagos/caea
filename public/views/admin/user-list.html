@@ -31,7 +31,10 @@
             <tr ng-repeat="user in users | filter:searchText | orderBy:sortOrder">
                 <td>{{ user.firstName }}</td>
                 <td>{{ user.lastName }}</td>
-                <td class="uk-width-1-10"><a href="/admin/user/{{ user.id }}">Ver perfil</a></td>
+                <td class="uk-width-2-10">
+                    <a class="uk-button uk-button-small" href="/admin/user/{{ user.id }}">Ver perfil</a>
+                    <a class="uk-button uk-button-small uk-button-danger" ng-click="deleteUser(user.id)">Eliminar</a>
+                </td>
             </tr>
             </tbody>
         </table>

@@ -10,19 +10,11 @@
             <li class="uk-active">{{ user.firstName }} {{ user.lastName }}</li>
         </ul>
         <h1 class="caea-title">{{ user.firstName }} {{ user.lastName }} <a class="uk-button uk-button-small" href="/admin/user/{{ user.id }}/editar"><i class="uk-icon-edit"></i> Editar</a></h1>
-        <table class="uk-table uk-table-striped">
-            <thead>
-            <tr>
-                <th>Nombre</th>
-                <th>Apellido</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr>
-                <td>{{ user.firstName }}</td>
-                <td>{{ user.lastName }}</td>
-            </tr>
-            </tbody>
-        </table>
+        <div class="uk-panel-box">
+            <p><b>Nombre:</b> {{ user.firstName }}</p>
+            <p>Apellido: {{ user.lastName }}</p>
+            <p>Username: {{ user.username }}</p>
+            <p class="uk-margin-small-bottom">Email: {{ user.email }}</p>
+        </div>
     </div>
 </div>

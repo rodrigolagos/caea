@@ -18,14 +18,20 @@ exports.getUser = function (req, res) {
 
 exports.createUser = function (req, res, next) {
     var userData = req.body;
+    var byAdmin = req.body.byAdmin;
     userData.username = userData.username.toLowerCase();
     userData.salt = encrypt.createSalt();
     userData.hashed_pwd = encrypt.hashPwd(userData.salt, userData.password);
     db.User.create(userData).then(function (user) {
-        req.logIn(user, function (err) {
-            if(err) { return next(err); }
+        if(byAdmin==true) {
             res.send(user);
-        })
+        } else {
+            req.logIn(user, function (err) {
+                if(err) { return next(err); }
+                res.send(user);
+            });
+        }
+
     }).catch(function (err) {
         if(err.toString() == 'SequelizeUniqueConstraintError: Validation error') {
             err = new Error('Duplicate Username');
@@ -59,4 +65,37 @@ exports.updateUser = function (req, res) {
             return res.send({reason:err.toString()});
         });
     });
-}
+};
+
+exports.deleteUser = function (req, res) {
+    db.User.findOne({where: {id:req.params.id}}).then(function (user) {
+        if(!user) {
+            res.send({error:{status:404, message: "El usuario no existe"}});
+        }
+        db.Student.findOne({where: {user_id:user.id}}).then(function (student) {
+            if(!student) {
+                db.Teacher.findOne({where: {user_id:user.id}}).then(function (teacher) {
+                    if(!teacher) {
+                        user.destroy().then(function () {
+                            res.send({success:true});
+                        })
+                    }
+                    teacher.destroy().then(function () {
+                        user.destroy().then(function () {
+                            res.send({success:true});
+                        })
+                    })
+                });
+                user.destroy().then(function () {
+                    res.send({success:true});
+                })
+            }
+            student.destroy().then(function () {
+                user.destroy().then(function () {
+                    res.send({success:true});
+                })
+            })
+
+        });
+    })
+};

@@ -10,7 +10,8 @@ angular.module('app').controller('caeaSignupCtrl', function ($scope, caeaUser, c
             username: $scope.username,
             rol_id: 3,
             password: $scope.password,
-            tipo_id: calcularTipo()
+            tipo_id: calcularTipo(),
+            byAdmin: false
         };
 
         caeaAuth.createUser(newUserData).then(function () {
@@ -28,7 +29,8 @@ angular.module('app').controller('caeaSignupCtrl', function ($scope, caeaUser, c
             username: $scope.username,
             rol_id: 2,
             password: $scope.password,
-            solicitud: $scope.solicitud
+            solicitud: $scope.solicitud,
+            byAdmin: false
         };
 
         caeaAuth.createUser(newUserData).then(function () {
