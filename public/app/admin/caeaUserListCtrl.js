@@ -1,7 +1,7 @@
 angular.module('app').controller('caeaUserListCtrl', function ($scope, caeaUser, caeaNotifier, $http) {
     $scope.users = caeaUser.query();
-    $scope.sortOptions = [{ value: "firstName", text: "Sort by nombre" },
-        { value: "lastName", text: "Sort by apellido"}];
+    $scope.sortOptions = [{ value: "firstName", text: "Ordenar por nombre" },
+        { value: "lastName", text: "Ordenar por apellido"}];
 
     $scope.sortOrder = $scope.sortOptions[0].value;
 
