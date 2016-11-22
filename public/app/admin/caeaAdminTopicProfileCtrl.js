@@ -13,7 +13,7 @@ angular.module('app').controller('caeaAdminTopicProfileCtrl', function ($scope, 
         }
         $scope.topic = topic;
         $scope.course = caeaCourse.get({id:topic.course_id});
-        $scope.materials = $http.get('/api/courses/1/topics/'+topic.id+'/materials').then(function (materials) {
+        $scope.materials = $http.get('/api/topics/'+topic.id+'/materials').then(function (materials) {
             if(!!materials.data.error) {
                 $scope.materials = undefined;
             }
@@ -40,4 +40,10 @@ angular.module('app').controller('caeaAdminTopicProfileCtrl', function ($scope, 
 
         UIkit.modal('#modal-id').show();
     }
+
+    $(".learning-button").click(function () {
+        $("#order-button > span").text($(this).text());
+        $("#order-button").attr('href', '/admin/topic/'+$(this).attr('topic-id')+'/materials/learning/'+$(this).attr('learning-id')+'/ordenar');
+        console.log($(this).attr('topic-id'));
+    })
 });

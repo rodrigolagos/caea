@@ -24,13 +24,27 @@
             </tbody>
         </table>
 
-        <h3>Materiales del tópico <a class="uk-button uk-button-primary uk-button-small" href="/admin/topic/{{ topic.id }}/materials/crear"><i class="uk-icon-upload"></i> Subir material</a></h3>
+        <h3>Materiales del tópico <a class="uk-button uk-button-primary uk-button-small" href="/admin/topic/{{ topic.id }}/materials/crear"><i class="uk-icon-upload"></i> Subir material</a> <a id="order-button" class="uk-button uk-button-primary uk-button-small" ng-show="!materials.error" href="/admin/topic/{{ topic.id }}/materials/learning/1/ordenar"><i class="uk-icon-edit"></i> Editar orden <span>Divergente</span></a></h3>
         <p class="uk-text-danger uk-margin-top" ng-show="materials.error">Este tópico aún no tiene materiales.</p>
-        <div class="uk-panel-box uk-margin-small-top" ng-repeat="material in materials" ng-show="!materials.error">
-            {{ material.title }}
-            <div class="uk-float-right">
-                <a class="uk-button uk-button-small" href="#"><i class="uk-icon-info"></i> Ver material</a>
+
+        <div ng-show="!materials.error">
+            <ul id="my-id" class="uk-subnav uk-subnav-pill">
+                <li data-uk-sort="posiciona"><a class="learning-button" learning-id="1" topic-id="{{ topic.id }}" href="#">Divergente</a></li>
+                <li data-uk-sort="posicionb"><a class="learning-button" learning-id="2" topic-id="{{ topic.id }}" href="#">Asimilador</a></li>
+                <li data-uk-sort="posicionc"><a class="learning-button" learning-id="3" topic-id="{{ topic.id }}" href="#">Adaptador</a></li>
+                <li data-uk-sort="posiciond"><a class="learning-button" learning-id="4" topic-id="{{ topic.id }}" href="#">Convergente</a></li>
+            </ul>
+
+            <div class="uk-grid" data-uk-grid="{gutter: 20, controls: '#my-id'}">
+                <div class="uk-width-medium-1-4" ng-repeat="material in materials" data-posiciona="{{ material.posicionA }}" data-posicionb="{{ material.posicionB }}" data-posicionc="{{ material.posicionC }}" data-posiciond="{{ material.posicionD }}">
+                    <div class="uk-panel-box">
+                        <div class="uk-float-right uk-text-large"><a class="uk-link-muted" href=""><i class="uk-icon-edit"></i></a></div>
+                        <h4 class="uk-panel-title">{{ material.titulo }}</h4>
+                        <p class="uk-margin-small-bottom">Tipo del material: <b>{{ material.tipo }}</b></p>
+                    </div>
+                </div>
             </div>
         </div>
+
     </div>
 </div>

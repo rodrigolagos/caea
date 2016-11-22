@@ -12,3 +12,21 @@ exports.createTeacher = function (req, res, next) {
         return res.send({reason:err.toString()});
     })
 };
+
+exports.getTeacher = function (req, res) {
+    db.Teacher.findOne({where: {id:req.params.id}}).then(function (teacher) {
+        if(!teacher) {
+            res.send({error:{status:404, message: "El profesor no existe"}});
+        }
+        res.send(teacher);
+    })
+};
+
+exports.getTeacherByUserId = function (req, res) {
+    db.Teacher.findOne({where: {user_id:req.params.userId}}).then(function (teacher) {
+        if(!teacher) {
+            res.send({error:{status:404, message: "El profesor no existe"}});
+        }
+        res.send(teacher);
+    })
+};

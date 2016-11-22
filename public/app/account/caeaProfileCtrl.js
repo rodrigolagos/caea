@@ -1,11 +1,11 @@
 angular.module('app').controller('caeaProfileCtrl', function ($scope, caeaAuth, caeaIdentity, caeaNotifier) {
-    $scope.email = caeaIdentity.currentUser.username;
+    $scope.email = caeaIdentity.currentUser.email;
     $scope.fname = caeaIdentity.currentUser.firstName;
     $scope.lname = caeaIdentity.currentUser.lastName;
 
     $scope.update = function () {
         var newUserData = {
-            username: $scope.email,
+            email: $scope.email,
             firstName: $scope.fname,
             lastName: $scope.lname
         }

@@ -1,0 +1,29 @@
+<div class="uk-grid">
+    <div class="uk-width-medium-1-4">
+        <div ng-include="'views/admin/includes/sidenav-menu.html'"></div>
+    </div>
+
+    <div class="uk-width-medium-3-4">
+        <ul class="uk-breadcrumb uk-margin-top">
+            <li><a href="/admin">Administración</a></li>
+            <li><a href="/admin/courses">Cursos</a></li>
+            <li><a href="/admin/course/{{ course.id }}">{{ course.title }}</a></li>
+            <li><a href="/admin/topic/{{ topic.id }}">{{ topic.title }}</a></li>
+            <li class="uk-active">Ordenar materiales</li>
+
+        </ul>
+        <h1 class="caea-title">{{ topic.title }} <a class="uk-button uk-button-small">Editar</a> </h1>
+
+        <ul class="uk-sortable uk-grid uk-grid-small uk-grid-width-1-4" data-uk-sortable="{handleClass:'uk-panel'}">
+            <li data-id="{{ material.id }}" class="uk-grid-margin" ng-repeat="material in topic.materials | orderBy:tipoAprendizaje">
+                <div class="uk-panel uk-panel-box">
+                    <div class="uk-badge uk-badge-notification uk-panel-badge">0</div>
+                    {{ material.titulo }}
+                </div>
+            </li>
+        </ul>
+
+        <button type="button" class="uk-button uk-button-primary uk-margin-top">Guardar orden</button>
+
+    </div>
+</div>

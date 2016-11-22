@@ -3,7 +3,7 @@ angular.module('app').factory( 'caeaTopicService', function ( $http, $q, caeaTop
         get: function getTopic(courseId, topicId) {
             var deferred = $q.defer();
             caeaTopic.get({id:topicId}, function (topic) {
-                $http.get('/api/courses/' + courseId + '/topics/' + topicId + '/materials').then(function (materials) {
+                $http.get('/api/topics/' + topicId + '/materials').then(function (materials) {
                     topic.materials = materials.data;
                     deferred.resolve(topic);
                 }, function (err) { deferred.reject(err); })

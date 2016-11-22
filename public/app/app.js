@@ -3,24 +3,40 @@ angular.module('app', ['ngResource', 'ngRoute', 'countTo', 'ngFileUpload', 'angu
 angular.module('app').config(function ($routeProvider, $locationProvider, paginationTemplateProvider) {
     paginationTemplateProvider.setPath('/views/common/includes/dirPagination.html');
     var auth = {
-        isAdmin: {auth: function (caeaAuth) {
-            return caeaAuth.authorizeCurrentUserForRoute(1)
+        isAdmin: {auth: function (caeaAuth, $q) {
+            if(caeaAuth.authorizeCurrentUserForRoute(1)) {
+                return true
+            } else {
+                return $q.reject('not authorized');
+            }
         }},
         isAdminOrStudentOrValidatedTeacher: {auth: function (caeaAuth, $q) {
-            if(caeaAuth.authorizeCurrentUserForRoute(1) || caeaAuth.authorizeCurrentUserForRoute(3)){
+            if(caeaAuth.authorizeCurrentUserForRoute(1) || caeaAuth.authorizeCurrentUserForRoute(3) || caeaAuth.authorizeCurrentUserForRoute(2)){
                 return true;
             } else {
                 return $q.reject('not authorized');
             }
         }},
-        isUser: {auth: function (caeaAuth) {
-            return caeaAuth.authorizeCurrentUserForRoute(3)
+        isUser: {auth: function (caeaAuth, $q) {
+            if(caeaAuth.authorizeCurrentUserForRoute(3)) {
+                return true
+            } else {
+                return $q.reject('not authorized');
+            }
         }},
-        isAuthenticated: {auth: function (caeaAuth) {
-            return caeaAuth.authorizeForRoute()
+        isAuthenticated: {auth: function (caeaAuth, $q) {
+            if(caeaAuth.authorizeForRoute()) {
+                return true
+            } else {
+                return $q.reject('not authorized');
+            }
         }},
-        isNotAuthenticated: {auth: function (caeaAuth) {
-            return caeaAuth.authorizeForNotLoggedUser()
+        isNotAuthenticated: {auth: function (caeaAuth, $q) {
+            if(caeaAuth.authorizeForNotLoggedUser()) {
+                return true
+            } else {
+                return $q.reject('is logged');
+            }
         }}
     };
 
@@ -73,6 +89,11 @@ angular.module('app').config(function ($routeProvider, $locationProvider, pagina
             controller: 'caeaAdminTopicProfileCtrl', resolve: auth.isAdmin,
             parent: 'admin', subparent: 'admin/courses'
         })
+        .when('/admin/topic/:topicId/materials/learning/:learningId/ordenar', {
+            templateUrl: 'views/admin/material-order.html',
+            controller: 'caeaAdminMaterialOrderCtrl', resolve: auth.isAdmin,
+            parent: 'admin', subparent: 'admin/courses'
+        })
         .when('/admin/topic/:topicId/materials/crear', {
             templateUrl: 'views/admin/material-upload.html',
             controller: 'caeaAdminMaterialUploadCtrl', resolve: auth.isAdmin,
@@ -98,7 +119,20 @@ angular.module('app').config(function ($routeProvider, $locationProvider, pagina
         });
 });
 
-angular.module('app').run(function ($rootScope, $location) {
+angular.module('app').run(function ($rootScope, $location, caeaIdentity, $http) {
+    $rootScope.$on('$routeChangeStart', function (event, next) {
+        if(!!caeaIdentity.currentUser) {
+            if(caeaIdentity.currentUser.rol_id==2){
+                $http.get('/api/users/'+caeaIdentity.currentUser.id+'/teachers').then(function (teacher) {
+                    if(teacher.data.validado) {
+                        console.log('profesor validado');
+                    } else{
+                        console.log('profesor no validado');
+                    }
+                })
+            }
+        }
+    });
     $rootScope.$on('$routeChangeError', function (evt, current, previuos, rejection) {
         if(rejection === 'not authorized') {
             $location.path('/login');
@@ -107,4 +141,4 @@ angular.module('app').run(function ($rootScope, $location) {
             $location.path('/');
         }
     })
-})
+});

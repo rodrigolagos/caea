@@ -99,6 +99,13 @@ angular.module('app').factory('caeaAuth', function ($http, caeaIdentity, $q, cae
                 return false;
             }
         },
+        authorizeCurrentUserForRouteByValidation: function () {
+            if(caeaIdentity.isTeacherValidated()) {
+                return true;
+            } else {
+                return false;
+            }
+        },
         authorizeForRoute: function () {
             if(caeaIdentity.isAuthenticated()) {
                 return true;
@@ -108,7 +115,7 @@ angular.module('app').factory('caeaAuth', function ($http, caeaIdentity, $q, cae
         },
         authorizeForNotLoggedUser: function () {
             if(caeaIdentity.isAuthenticated()) {
-                return $q.reject('is logged');
+                return false;
             } else {
                 return true;
             }

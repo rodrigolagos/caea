@@ -1,5 +1,22 @@
-angular.module('app').controller('caeaTopicProfileCtrl', function ($scope, $routeParams, caeaCourse, caeaTopicService, $location, caeaIdentity, $sce) {
+angular.module('app').controller('caeaTopicProfileCtrl', function ($scope, $routeParams, caeaCourse, caeaTopicService, $location, caeaIdentity, $sce, $http) {
     $scope.identity = caeaIdentity;
+    $http.get('/api/users/'+caeaIdentity.currentUser.id+'/students').then(function (student) {
+        switch(student.data.tipo_id){
+            case 1:
+                $scope.tipoAprendizaje = 'posicionA';
+                break;
+            case 2:
+                $scope.tipoAprendizaje = 'posicionB';
+                break;
+            case 3:
+                $scope.tipoAprendizaje = 'posicionC';
+                break;
+            case 4:
+                $scope.tipoAprendizaje = 'posicionD';
+                break;
+
+        }
+    });
     $scope.course = caeaCourse.get({id:$routeParams.courseId});
     caeaTopicService.get($routeParams.courseId, $routeParams.topicId).then(function (topic) {
         //Si existe un error

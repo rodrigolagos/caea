@@ -26,15 +26,20 @@ module.exports = function (app) {
 
     app.get('/api/materials', auth.requireAuthentication, materials.getMaterials);
     app.post('/api/materials', auth.requiresRole(1), materials.createMaterial);
-    app.get('/api/courses/:courseId/topics/:topicId/materials', auth.requireAuthentication, materials.getMaterialsByTopicId);
+    app.get('/api/topics/:topicId/materials', auth.requireAuthentication, materials.getMaterialsByTopicId);
     app.get('/api/materials/:id', auth.requireAuthentication, materials.getMaterial);
+    app.put('/api/materials/:id', auth.requiresRole(1), materials.updateMaterial);
 
     app.get('/api/preguntas', preguntas.getPreguntas);
     app.get('/api/alternativas', alternativas.getAlternativas);
 
+    app.get('/api/students/:id', students.getStudent);
     app.post('/api/students', students.createStudent);
+    app.get('/api/users/:userId/students', students.getStudentByUserId);
 
     app.post('/api/teachers', teachers.createTeacher);
+    app.get('/api/teachers/:id', teachers.getTeacher);
+    app.get('/api/users/:userId/teachers', teachers.getTeacherByUserId);
 
     app.post('/api/validation-requests', validation_requests.createValidationRequest);
 
