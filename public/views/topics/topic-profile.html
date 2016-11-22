@@ -3,7 +3,7 @@
     <li><a href="/course/{{ course.id }}">{{ course.title }}</a></li>
     <li class="uk-active"><span>{{ topic.title }}</span></li>
 </ul>
-<h1>{{ topic.title }} <a href="/admin/topic/{{ topic.id }}" class="uk-button uk-button-small uk-button-primary uk-margin-left" ng-show="identity.isAuthorized(1)"><i class="uk-icon-edit"></i> Editar tópico</a></h1>
+<h1>{{ topic.title }} <a href="/admin/topic/{{ topic.id }}" class="uk-button uk-button-small uk-button-primary uk-margin-left" ng-show="identity.isAuthorized(1)"><i class="uk-icon-edit"></i> Editar tópico</a> <a class="uk-button uk-button-small uk-button-primary uk-margin-left" ng-show="identity.isAuthorized(3)" ng-click="openModalFeedback()"><i class="uk-icon-edit"></i> Feedback</a></h1>
 <p>A continuación se muestran listados los materiales del tópico</p>
 <p class="uk-text-danger" ng-show="topic.materials.error">{{ topic.materials.error.message }}</p>
 
@@ -52,6 +52,27 @@
             <div class="uk-width-medium-1-4 uk-width-small-1-1">
                 <h3>Comentarios</h3>
             </div>
+        </div>
+    </div>
+</div>
+
+<div id="modal-feedback" class="uk-modal">
+    <div class="uk-modal-dialog uk-modal-dialog-large">
+        <a class="uk-modal-close uk-close"></a>
+        <div class="uk-modal-header">
+            <h2>Recomendar orden de materiales</h2>
+        </div>
+        <p>Arrastra los materiales para editar el orden de estos</p>
+        <ul class="uk-sortable uk-grid uk-grid-small uk-grid-width-1-4 uk-margin-large-bottom" data-uk-sortable="{handleClass:'uk-panel'}">
+            <li data-id="{{ material.id }}" class="uk-grid-margin" ng-repeat="material in topic.materials | orderBy:tipoAprendizaje">
+                <div class="uk-panel uk-panel-box">
+                    {{ material.titulo }}
+                </div>
+            </li>
+        </ul>
+        <div class="uk-modal-footer uk-text-right">
+            <a ng-click="cancelFeedback()" class="uk-button ">Cancelar</a>
+            <a ng-click="sendFeedback()" class="uk-button uk-button-primary">Enviar</a>
         </div>
     </div>
 </div>

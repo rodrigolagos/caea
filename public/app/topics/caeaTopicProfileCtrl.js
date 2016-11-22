@@ -1,4 +1,4 @@
-angular.module('app').controller('caeaTopicProfileCtrl', function ($scope, $routeParams, caeaCourse, caeaTopicService, $location, caeaIdentity, $sce, $http) {
+angular.module('app').controller('caeaTopicProfileCtrl', function ($scope, $routeParams, caeaCourse, caeaTopicService, $location, caeaIdentity, $sce, $http, caeaNotifier) {
     $scope.identity = caeaIdentity;
     $http.get('/api/users/'+caeaIdentity.currentUser.id+'/students').then(function (student) {
         switch(student.data.tipo_id){
@@ -50,5 +50,18 @@ angular.module('app').controller('caeaTopicProfileCtrl', function ($scope, $rout
         }
 
         UIkit.modal('#modal-id').show();
+    };
+
+    $scope.openModalFeedback = function () {
+        UIkit.modal('#modal-feedback').show();
+    };
+
+    $scope.sendFeedback = function () {
+        caeaNotifier.success('Feedback enviado correctamente');
+        UIkit.modal('#modal-feedback').hide();
+    };
+
+    $scope.cancelFeedback = function () {
+        UIkit.modal('#modal-feedback').hide();
     }
 });
