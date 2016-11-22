@@ -14,7 +14,7 @@ angular.module('app').controller('caeaProfileCtrl', function ($scope, caeaAuth, 
         }
 
         caeaAuth.updateCurrentUser(newUserData).then(function () {
-            caeaNotifier.success('Your user account has been updated');
+            caeaNotifier.success('Tus datos han sido actualizados correctamente');
         }, function (reason) {
             caeaNotifier.error(reason);
         })

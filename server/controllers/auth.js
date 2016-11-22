@@ -7,10 +7,10 @@ exports.authenticate = function (req, res, next) {
         req.body.username = req.body.username.toLowerCase();
         var auth = passport.authenticate('local', function (err, user) {
             if (err) { return next(err); }
-            if (!user) { res.send({ success:false, msg: 'Username or Password incorrect' }) }
+            if (!user) { res.send({ success:false, msg: 'Usuario o password incorrecto' }) }
             req.logIn(user, function (err) {
                 if (err) { return next(err); }
-                res.send({ success:true, user: user, msg: 'You have succesfully signed in!' });
+                res.send({ success:true, user: user, msg: 'Sesión iniciada correctamente' });
             })
         })
         auth(req, res, next);
@@ -19,7 +19,7 @@ exports.authenticate = function (req, res, next) {
 
 exports.logout = function (req, res) {
     req.logout();
-    res.send({msg: 'You have successfully signed out'});
+    res.send({msg: 'Su sesión ha sido cerrada correctamente'});
 };
 
 exports.requireAuthentication = function(req, res, next) {
