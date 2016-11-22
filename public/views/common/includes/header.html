@@ -8,6 +8,9 @@
                     <div>Cursos inscritos</div>
                 </a>
             </li>
+            <li ng-class="{ 'uk-active': isActive('/') }" ng-show="identity.isAuthorized(2)">
+                <a style="border-top-left-radius: 4px; border-bottom-left-radius: 4px" href="/">Inicio</a>
+            </li>
             <li ng-class="{ 'uk-active': isActive('/') }" ng-show="identity.isAuthorized(1)">
                 <a style="border-top-left-radius: 4px; border-bottom-left-radius: 4px" href="/">Inicio</a>
             </li>

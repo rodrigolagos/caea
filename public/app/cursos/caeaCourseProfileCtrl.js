@@ -1,4 +1,5 @@
-angular.module('app').controller('caeaCourseProfileCtrl', function ($scope, $routeParams, caeaCourse, $location, caeaCourseService) {
+angular.module('app').controller('caeaCourseProfileCtrl', function ($scope, $routeParams, caeaCourse, $location, caeaCourseService, caeaIdentity) {
+    $scope.identity = caeaIdentity;
     $scope.course = caeaCourseService.get($routeParams.courseId).then(function(course) {
         //Si existe un error
         if(!!course.error) {

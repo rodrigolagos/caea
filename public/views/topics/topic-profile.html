@@ -3,7 +3,7 @@
     <li><a href="/course/{{ course.id }}">{{ course.title }}</a></li>
     <li class="uk-active"><span>{{ topic.title }}</span></li>
 </ul>
-<h1>{{ topic.title }} <a href="/admin/topic/{{ topic.id }}" class="uk-button uk-button-small uk-button-primary uk-margin-left" ng-show="identity.isAuthorized(1)"><i class="uk-icon-edit"></i> Editar tópico</a> <a class="uk-button uk-button-small uk-button-primary uk-margin-left" ng-show="identity.isAuthorized(3)" ng-click="openModalFeedback()"><i class="uk-icon-edit"></i> Feedback</a></h1>
+<h1>{{ topic.title }} <a href="/admin/topic/{{ topic.id }}" class="uk-button uk-button-small uk-button-primary uk-margin-left" ng-show="identity.isAuthorized(1) || identity.isAuthorized(2)"><i class="uk-icon-edit"></i> Editar tópico</a> <a class="uk-button uk-button-small uk-button-primary uk-margin-left" ng-show="identity.isAuthorized(3)" ng-click="openModalFeedback()"><i class="uk-icon-edit"></i> Feedback</a></h1>
 <p>A continuación se muestran listados los materiales del tópico</p>
 <p class="uk-text-danger" ng-show="topic.materials.error">{{ topic.materials.error.message }}</p>
 
