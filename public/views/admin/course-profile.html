@@ -9,7 +9,7 @@
             <li><a href="/admin/courses">Cursos</a></li>
             <li class="uk-active">{{ course.title }}</li>
         </ul>
-        <h1 class="caea-title">{{ course.title }} <a class="uk-button uk-button-small" href="#">Editar</a> </h1>
+        <h1 class="caea-title">{{ course.title }} <a class="uk-button uk-button-small" href="#"><i class="uk-icon-edit"></i> Editar</a> </h1>
         <table class="uk-table uk-table-striped">
             <thead>
             <tr>
@@ -30,6 +30,7 @@
             {{ topic.title }}
             <div class="uk-float-right">
                 <a class="uk-button uk-button-small" href="/admin/topic/{{ topic.id }}"><i class="uk-icon-info-circle"></i> Ver tópico</a>
+                <a class="uk-button uk-button-small uk-button-danger">Eliminar</a>
             </div>
         </div>
     </div>
