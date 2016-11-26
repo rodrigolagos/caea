@@ -1,6 +1,6 @@
 angular.module('app').controller('caeaAdminMaterialUploadCtrl', function (Upload, $window, caeaNotifier, $scope, caeaTopic, $routeParams, caeaCourse, caeaMaterial, $q, $http) {
     $scope.topic = caeaTopic.get({id:$routeParams.topicId}, function (topic) {
-        $scope.course = caeaCourse.get({id:topic.course_id});
+        $scope.course = caeaCourse.get({id:topic.ramo_id});
     });
     var vm = this;
     vm.submit = function(){ //function to call on form submit

@@ -9,6 +9,7 @@ module.exports = function (sequelize, DataTypes) {
         associate: function(models) {
             Student.belongsTo(models.Student_Type, {foreignKey: 'tipo_id'});
             Student.belongsTo(models.User, {foreignKey: 'user_id'});
+            Student.hasMany(models.Student_Course, {foreignKey: 'estudiante_id'});
         },
         tableName: 'Estudiante'
     });

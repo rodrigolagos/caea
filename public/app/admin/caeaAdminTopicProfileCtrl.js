@@ -12,7 +12,7 @@ angular.module('app').controller('caeaAdminTopicProfileCtrl', function ($scope, 
             }
         }
         $scope.topic = topic;
-        $scope.course = caeaCourse.get({id:topic.course_id});
+        $scope.course = caeaCourse.get({id:topic.ramo_id});
         $scope.materials = $http.get('/api/topics/'+topic.id+'/materials').then(function (materials) {
             if(!!materials.data.error) {
                 $scope.materials = undefined;

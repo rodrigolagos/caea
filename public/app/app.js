@@ -44,77 +44,91 @@ angular.module('app').config(function ($routeProvider, $locationProvider, pagina
     $routeProvider
         .when('/', {
             templateUrl: 'views/cursos/course-list.html',
-            controller: 'caeaCourseListCtrl', resolve: auth.isAdminOrStudentOrValidatedTeacher
+            controller: 'caeaCourseListCtrl',
+            roles: ['admin', 'student', 'validated_teacher']
         })
         .when('/course/:courseId', {
             templateUrl: 'views/cursos/course-profile.html',
-            controller: 'caeaCourseProfileCtrl', resolve: auth.isAuthenticated
+            controller: 'caeaCourseProfileCtrl',
+            roles: ['admin', 'student', 'validated_teacher']
         })
         .when('/course/:courseId/topic/:topicId', {
             templateUrl: 'views/topics/topic-profile.html',
-            controller: 'caeaTopicProfileCtrl', resolve: auth.isAuthenticated
+            controller: 'caeaTopicProfileCtrl',
+            roles: ['admin', 'student', 'validated_teacher']
         })
         .when('/admin', {
             templateUrl: 'views/admin/main.html',
-            controller: 'caeaAdminMainCtrl', resolve: auth.isAdmin,
+            controller: 'caeaAdminMainCtrl',
+            roles: ['admin'],
             parent: 'admin'
         })
         .when('/admin/users', {
             templateUrl: 'views/admin/user-list.html',
-            controller: 'caeaUserListCtrl', resolve: auth.isAdmin,
+            controller: 'caeaUserListCtrl',
+            roles: ['admin'],
             parent: 'admin', subparent: 'admin/users'
         })
         .when('/admin/user/crear', {
             templateUrl: 'views/admin/user-create.html',
-            controller: 'caeaAdminUserCreateCtrl', resolve: auth.isAdmin,
+            controller: 'caeaAdminUserCreateCtrl',
+            roles: ['admin'],
             parent: 'admin', subparent: 'admin/users'
         })
         .when('/admin/user/:userId', {
             templateUrl: 'views/admin/user-profile.html',
-            controller: 'caeaUserProfileCtrl', resolve: auth.isAdmin,
+            controller: 'caeaUserProfileCtrl',
+            roles: ['admin'],
             parent: 'admin', subparent: 'admin/users'
         })
         .when('/admin/user/:userId/editar', {
             templateUrl: 'views/admin/user-edit.html',
-            controller: 'caeaUserEditCtrl', resolve: auth.isAdmin,
+            controller: 'caeaUserEditCtrl',
+            roles: ['admin'],
             parent: 'admin', subparent: 'admin/users'
         })
         .when('/admin/courses', {
             templateUrl: 'views/admin/course-list.html',
-            controller: 'caeaCourseListCtrl', resolve: auth.isAdmin,
+            controller: 'caeaCourseListCtrl',
+            roles: ['admin'],
             parent: 'admin', subparent: 'admin/courses'
         })
         .when('/admin/course/:courseId', {
             templateUrl: 'views/admin/course-profile.html',
-            controller: 'caeaCourseProfileCtrl', resolve: auth.isAdmin,
+            controller: 'caeaCourseProfileCtrl',
+            roles: ['admin'],
             parent: 'admin', subparent: 'admin/courses'
         })
         .when('/admin/topic/:topicId', {
             templateUrl: 'views/admin/topic-profile.html',
-            controller: 'caeaAdminTopicProfileCtrl', resolve: auth.isAdmin,
+            controller: 'caeaAdminTopicProfileCtrl',
+            roles: ['admin'],
             parent: 'admin', subparent: 'admin/courses'
         })
         .when('/admin/topic/:topicId/materials/learning/:learningId/ordenar', {
             templateUrl: 'views/admin/material-order.html',
-            controller: 'caeaAdminMaterialOrderCtrl', resolve: auth.isAdmin,
+            controller: 'caeaAdminMaterialOrderCtrl',
+            roles: ['admin'],
             parent: 'admin', subparent: 'admin/courses'
         })
         .when('/admin/topic/:topicId/materials/crear', {
             templateUrl: 'views/admin/material-upload.html',
-            controller: 'caeaAdminMaterialUploadCtrl', resolve: auth.isAdmin,
+            controller: 'caeaAdminMaterialUploadCtrl',
+            roles: ['admin'],
             parent: 'admin', subparent: 'admin/courses'
         })
         .when('/login', {
             templateUrl: 'views/account/login.html',
-            controller: 'caeaLoginCtrl', resolve: auth.isNotAuthenticated
+            controller: 'caeaLoginCtrl'
         })
         .when('/signup', {
             templateUrl: 'views/account/signup.html',
-            controller: 'caeaSignupCtrl', resolve: auth.isNotAuthenticated
+            controller: 'caeaSignupCtrl'
         })
         .when('/profile', {
             templateUrl: 'views/account/profile.html',
-            controller: 'caeaProfileCtrl', resolve: auth.isAuthenticated
+            controller: 'caeaProfileCtrl',
+            roles: ['admin', 'student', 'validated_teacher', 'not_validated_teacher']
         })
         .when('/404', {
             templateUrl: 'views/404.html'
@@ -124,9 +138,58 @@ angular.module('app').config(function ($routeProvider, $locationProvider, pagina
         });
 });
 
-angular.module('app').run(function ($rootScope, $location, caeaIdentity, $http) {
-    $rootScope.$on('$routeChangeStart', function (event, next) {
-        if(!!caeaIdentity.currentUser) {
+angular.module('app').run(['$rootScope', '$location', 'caeaIdentity', '$http', '$route', function ($rootScope, $location, caeaIdentity, $http, $route) {
+    function getPath(route) {
+        if (!!route && typeof(route.originalPath) === "string")
+            return "'" + route.originalPath + "'";
+        return "[unknown route, using otherwise]";
+    }
+    $rootScope.$on('$routeChangeStart', function (event, to, from) {
+        console.log("Route change start from", getPath(from), "to", getPath(to));
+        if(!!to.roles) {
+            if(caeaIdentity.isAuthenticated()) {
+                var role = '';
+                if(caeaIdentity.currentUser.rol_id == 1 || caeaIdentity.currentUser.rol_id == 3 ) {
+                    if(caeaIdentity.currentUser.rol_id == 3) {
+                        role = 'student';
+                    } else {
+                        role = 'admin';
+                    }
+                    console.log(role);
+                    if(!to.roles.includes(role)) {
+                        location.replace('/login');
+                    }
+
+                } else {
+                    $http.get('/api/users/'+caeaIdentity.currentUser.id+'/teachers').then(function (teacher) {
+                        if(teacher.data.validado) {
+                            role = 'validated_teacher';
+                        } else{
+                            role = 'not_validated_teacher';
+                        }
+                        console.log(role);
+                        if(!to.roles.includes(role)) {
+                            console.log(role);
+                            if(role=='not_validated_teacher') {
+                                location.replace('/404');
+                            } else {
+                                location.replace('/login');
+                            }
+                        }
+                    })
+                }
+            } else {
+                $location.path('/login');
+            }
+            console.log('ruta protegida');
+        } else {
+            if($location.path() != '/404') {
+                if(caeaIdentity.isAuthenticated()) {
+                    $location.path('/');
+                }
+            }
+        }
+        /*if(!!caeaIdentity.currentUser) {
             if(caeaIdentity.currentUser.rol_id==2){
                 $http.get('/api/users/'+caeaIdentity.currentUser.id+'/teachers').then(function (teacher) {
                     if(teacher.data.validado) {
@@ -136,7 +199,7 @@ angular.module('app').run(function ($rootScope, $location, caeaIdentity, $http) 
                     }
                 })
             }
-        }
+        }*/
     });
     $rootScope.$on('$routeChangeError', function (evt, current, previuos, rejection) {
         if(rejection === 'not authorized') {
@@ -146,4 +209,4 @@ angular.module('app').run(function ($rootScope, $location, caeaIdentity, $http) 
             $location.path('/');
         }
     })
-});
+}]);

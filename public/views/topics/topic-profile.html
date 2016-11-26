@@ -1,9 +1,9 @@
 <ul class="uk-breadcrumb uk-margin-top">
     <li><a href="/">Mis cursos</a></li>
-    <li><a href="/course/{{ course.id }}">{{ course.title }}</a></li>
-    <li class="uk-active"><span>{{ topic.title }}</span></li>
+    <li><a href="/course/{{ course.id }}">{{ course.nombre }}</a></li>
+    <li class="uk-active"><span>{{ topic.titulo }}</span></li>
 </ul>
-<h1>{{ topic.title }} <a href="/admin/topic/{{ topic.id }}" class="uk-button uk-button-small uk-button-primary uk-margin-left" ng-show="identity.isAuthorized(1) || identity.isAuthorized(2)"><i class="uk-icon-edit"></i> Editar tópico</a> <a class="uk-button uk-button-small uk-button-primary uk-margin-left" ng-show="identity.isAuthorized(3)" ng-click="openModalFeedback()"><i class="uk-icon-edit"></i> Feedback</a></h1>
+<h1>{{ topic.titulo }} <a href="/admin/topic/{{ topic.id }}" class="uk-button uk-button-small uk-button-primary uk-margin-left" ng-show="identity.isAuthorized(1) || identity.isAuthorized(2)"><i class="uk-icon-edit"></i> Editar tópico</a> <a class="uk-button uk-button-small uk-button-primary uk-margin-left" ng-show="identity.isAuthorized(3)" ng-click="openModalFeedback()"><i class="uk-icon-edit"></i> Feedback</a></h1>
 <p>A continuación se muestran listados los materiales del tópico</p>
 <p class="uk-text-danger" ng-show="topic.materials.error">{{ topic.materials.error.message }}</p>
 
@@ -47,8 +47,8 @@
 <div id="modal-id" class="uk-modal">
     <div class="uk-modal-dialog uk-modal-dialog-large">
         <a class="uk-modal-close uk-close"></a>
-        <div class="uk-grid">
-            <div id="content" class="uk-width-medium-3-4 uk-width-small-1-1 uk-text-center"></div>
+        <div class="uk-grid uk-container">
+            <div id="content" class="uk-width-medium-3-4 uk-width-small-1-1 uk-text-center uk-border-rounded"></div>
             <div class="uk-width-medium-1-4 uk-width-small-1-1">
                 <h3>Comentarios</h3>
             </div>

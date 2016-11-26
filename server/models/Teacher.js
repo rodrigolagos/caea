@@ -16,6 +16,7 @@ module.exports = function (sequelize, DataTypes) {
             Teacher.hasOne(models.Validation_Request, {foreignKey: 'profesor_id'});
             Teacher.hasMany(models.Teacher_Validation, {foreignKey: 'id_solicitante'});
             Teacher.hasMany(models.Teacher_Validation, {foreignKey: 'id_validador'});
+            Teacher.hasMany(models.Teacher_Course, {foreignKey: 'profesor_id'});
         },
         tableName: 'Profesor',
         timestamps: false

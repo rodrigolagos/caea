@@ -12,8 +12,8 @@ angular.module('app').controller('caeaAdminMaterialOrderCtrl', function ($scope,
             }
         }
         $scope.topic = topic;
-        $scope.course = caeaCourse.get({id:topic.course_id});
-        caeaTopicService.get(topic.course_id, $routeParams.topicId).then(function (topic) {
+        $scope.course = caeaCourse.get({id:topic.ramo_id});
+        caeaTopicService.get(topic.ramo_id, $routeParams.topicId).then(function (topic) {
             //Si existe un error
             if(!!topic.error) {
                 switch(topic.error.status) {

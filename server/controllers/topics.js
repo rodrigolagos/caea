@@ -14,7 +14,7 @@ exports.getTopic = function (req, res) {
     })
 };
 exports.getTopicsByCourseId = function (req, res) {
-    db.Topic.findAll({where: {course_id:req.params.courseId}, include: [db.Course] }).then(function (topics) {
+    db.Topic.findAll({where: {ramo_id:req.params.courseId}, include: [db.Course] }).then(function (topics) {
         res.send(topics);
     })
 };

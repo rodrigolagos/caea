@@ -19,14 +19,14 @@
             <thead>
             <tr>
                 <th>Titulo</th>
-                <th>Fecha</th>
+                <th>Sigla</th>
                 <th></th>
             </tr>
             </thead>
             <tbody>
             <tr ng-repeat="course in courses | filter:searchText | orderBy:sortOrder">
-                <td>{{ course.title }}</td>
-                <td>{{ course.published | date }}</td>
+                <td>{{ course.nombre }}</td>
+                <td>{{ course.sigla }}</td>
                 <td class="uk-width-2-10">
                     <a class="uk-button uk-button-small" href="/admin/course/{{ course.id }}">Ver curso</a>
                     <a class="uk-button uk-button-small uk-button-danger">Eliminar</a>

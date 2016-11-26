@@ -7,27 +7,27 @@
         <ul class="uk-breadcrumb uk-margin-top">
             <li><a href="/admin">Administración</a></li>
             <li><a href="/admin/courses">Cursos</a></li>
-            <li class="uk-active">{{ course.title }}</li>
+            <li class="uk-active">{{ course.nombre }}</li>
         </ul>
-        <h1 class="caea-title">{{ course.title }} <a class="uk-button uk-button-small" href="#"><i class="uk-icon-edit"></i> Editar</a> </h1>
+        <h1 class="caea-title">{{ course.nombre }} <a class="uk-button uk-button-small" href="#"><i class="uk-icon-edit"></i> Editar</a> </h1>
         <table class="uk-table uk-table-striped">
             <thead>
             <tr>
                 <th>Titulo</th>
-                <th>Fecha</th>
+                <th>Sigla</th>
             </tr>
             </thead>
             <tbody>
             <tr>
-                <td>{{ course.title }}</td>
-                <td>{{ course.published | date }}</td>
+                <td>{{ course.nombre }}</td>
+                <td>{{ course.sigla }}</td>
             </tr>
             </tbody>
         </table>
 
         <h3>Tópicos del curso <a class="uk-button uk-button-small" href=""><i class="uk-icon-plus"></i> Crear tópico</a></h3>
         <div class="uk-panel-box uk-margin-small-top" ng-repeat="topic in course.topics">
-            {{ topic.title }}
+            {{ topic.titulo }}
             <div class="uk-float-right">
                 <a class="uk-button uk-button-small" href="/admin/topic/{{ topic.id }}"><i class="uk-icon-info-circle"></i> Ver tópico</a>
                 <a class="uk-button uk-button-small uk-button-danger">Eliminar</a>
