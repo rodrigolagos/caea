@@ -4,13 +4,13 @@
         <select ng-model="sortOrder" ng-options="item.value as item.text for item in sortOptions"></select>
     </form>
 </div>
-<h1>Cursos</h1>
+<h1>Cursos <a href="/course/inscribir" class="uk-button uk-button-small uk-button-primary uk-margin-left" ng-show="identity.isAuthorized(2) || identity.isAuthorized(3)"><i class="uk-icon-plus"></i> Inscribir curso</a></h1>
 <p>A continuación se muestran listados los ramos inscritos</p>
 
-
+<p class="uk-text-danger" ng-show="courses.length==0">Aún no tienes cursos inscritos.</p>
 <div class="uk-panel uk-panel-box uk-margin-bottom" dir-paginate="course in courses | filter:searchText | orderBy:sortOrder | itemsPerPage: 5">
     <h3 class="uk-panel-title"><a class="uk-link-muted" href="/course/{{ course.id }}" ><i class="uk-icon-book"></i> {{ course.nombre }}</a></h3>
-    <p><b>Profesor:</b> Rodrigo Lagos</p>
+    <p><b>Código:</b> {{ course.sigla }}</p>
 </div>
 
 <dir-pagination-controls></dir-pagination-controls>

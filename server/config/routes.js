@@ -8,13 +8,15 @@ var auth = require('../controllers/auth'),
     students = require('../controllers/students'),
     teachers = require('../controllers/teachers'),
     validation_requests = require('../controllers/validation_requests'),
+    student_courses = require('../controllers/student_courses'),
+    teacher_courses = require('../controllers/teacher_courses'),
     multer = require('./multer');
 
 module.exports = function (app) {
 
     app.get('/api/users', auth.requiresRole(1), users.getUsers);
     app.post('/api/users', users.createUser);
-    app.get('/api/users/:id', auth.requiresRole(1), users.getUser);
+    app.get('/api/users/:id', users.getUser);
     app.put('/api/users/:id', auth.hasAuthorization, users.updateUser);
     app.delete('/api/users/:id', auth.requiresRole(1), users.deleteUser);
 
@@ -23,6 +25,12 @@ module.exports = function (app) {
     app.get('/api/courses/:id', auth.requireAuthentication, courses.getCourse);
     app.put('/api/courses/:id', auth.requiresRole(1), courses.updateCourse);
     app.delete('/api/courses/:id', auth.requiresRole(1), courses.deleteCourse);
+
+    app.get('/api/students/:studentId/student-courses', student_courses.getStudentCourseByStudentId);
+    app.post('/api/student-courses', student_courses.createStudentCourse);
+
+    app.get('/api/teachers/:teacherId/teacher-courses', teacher_courses.getStudentCourseByTeacherId);
+    app.post('/api/teacher-courses', teacher_courses.createTeacherCourse);
 
     app.get('/api/topics', auth.requireAuthentication, topics.getTopics);
     app.post('/api/topics', auth.requiresRole(1), topics.createTopic);
@@ -45,10 +53,12 @@ module.exports = function (app) {
     app.post('/api/students', students.createStudent);
     app.get('/api/users/:userId/students', students.getStudentByUserId);
 
+    app.get('/api/teachers', teachers.getTeachers);
     app.post('/api/teachers', teachers.createTeacher);
     app.get('/api/teachers/:id', teachers.getTeacher);
     app.get('/api/users/:userId/teachers', teachers.getTeacherByUserId);
 
+    app.get('/api/validation-requests', validation_requests.getValidationRequests);
     app.post('/api/validation-requests', validation_requests.createValidationRequest);
 
     app.post('/login', auth.authenticate);

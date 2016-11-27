@@ -47,6 +47,11 @@ angular.module('app').config(function ($routeProvider, $locationProvider, pagina
             controller: 'caeaCourseListCtrl',
             roles: ['admin', 'student', 'validated_teacher']
         })
+        .when('/course/inscribir', {
+            templateUrl: 'views/cursos/course-enroll.html',
+            controller: 'caeaCourseEnrollCtrl',
+            roles: ['admin', 'validated_teacher', 'student']
+        })
         .when('/course/:courseId', {
             templateUrl: 'views/cursos/course-profile.html',
             controller: 'caeaCourseProfileCtrl',
@@ -147,6 +152,11 @@ angular.module('app').config(function ($routeProvider, $locationProvider, pagina
             roles: ['admin'],
             parent: 'admin', subparent: 'admin/courses'
         })
+        .when('/forum', {
+            templateUrl: 'views/forum/forum-home.html',
+            controller: 'caeaForumHomeCtrl',
+            roles: ['admin', 'validated_teacher', 'not_validated_teacher']
+        })
         .when('/login', {
             templateUrl: 'views/account/login.html',
             controller: 'caeaLoginCtrl'
@@ -201,7 +211,7 @@ angular.module('app').run(['$rootScope', '$location', 'caeaIdentity', '$http', '
                         if(!to.roles.includes(role)) {
                             console.log(role);
                             if(role=='not_validated_teacher') {
-                                location.replace('/404');
+                                location.replace('/forum');
                             } else {
                                 location.replace('/login');
                             }

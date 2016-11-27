@@ -1,5 +1,10 @@
 var db = require('../config/sequelize');
 
+exports.getTeachers = function (req, res) {
+    db.Teacher.findAll({}).then(function (teachers) {
+        res.send(teachers);
+    })
+};
 exports.createTeacher = function (req, res, next) {
     var teacherData = req.body;
     db.Teacher.create(teacherData).then(function (teacher) {

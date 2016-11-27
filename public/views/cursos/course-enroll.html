@@ -1,0 +1,19 @@
+<div class="uk-float-right">
+    <form class="uk-form uk-margin-remove uk-display-inline-block">
+        <input placeholder="Filtrar" ng-model="searchText">
+        <select ng-model="sortOrder" ng-options="item.value as item.text for item in sortOptions"></select>
+    </form>
+</div>
+<h1>Inscribir Curso</h1>
+<p>A continuación se muestran listados todos los ramos disponibles</p>
+
+
+<div class="uk-panel uk-panel-box uk-margin-bottom" dir-paginate="course in courses | filter:searchText | orderBy:sortOrder | itemsPerPage: 5">
+    <div class="uk-float-right">
+        <a class="uk-button uk-button-small uk-button-primary" ng-click="enrollCourse(course.id)">Inscribir</a>
+    </div>
+    <h3 class="uk-panel-title"><i class="uk-icon-book"></i> {{ course.nombre }}</h3>
+    <p><b>Código:</b> {{ course.sigla }}</p>
+</div>
+
+<dir-pagination-controls></dir-pagination-controls>

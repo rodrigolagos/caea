@@ -16,7 +16,7 @@ module.exports = function (sequelize, DataTypes) {
             Teacher.hasOne(models.Validation_Request, {foreignKey: {name: 'profesor_id'}, onDelete: 'CASCADE'});
             Teacher.hasMany(models.Teacher_Validation, {foreignKey: {name: 'id_solicitante'}, onDelete: 'CASCADE'});
             Teacher.hasMany(models.Teacher_Validation, {foreignKey: {name: 'id_validador'}, onDelete: 'CASCADE'});
-            Teacher.hasMany(models.Teacher_Course, {foreignKey: {name: 'profesor_id'}, onDelete: 'CASCADE'});
+            Teacher.hasMany(models.Teacher_Course, {foreignKey: {name: 'profesor_id', primaryKey:true}, onDelete: 'CASCADE'});
         },
         tableName: 'Profesor',
         timestamps: false

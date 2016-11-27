@@ -11,8 +11,8 @@ module.exports = function (sequelize, DataTypes) {
     },{
         associate: function(models) {
             Course.hasMany(models.Topic, {foreignKey: {name: 'ramo_id'}, onDelete: 'CASCADE'});
-            Course.hasMany(models.Teacher_Course, {foreignKey: {name: 'ramo_id'}, onDelete: 'CASCADE'});
-            Course.hasMany(models.Student_Course, {foreignKey: {name: 'ramo_id'}, onDelete: 'CASCADE'});
+            Course.hasMany(models.Teacher_Course, {foreignKey: {name: 'ramo_id', primaryKey:true}, onDelete: 'CASCADE'});
+            Course.hasMany(models.Student_Course, {foreignKey: {name: 'ramo_id', primaryKey:true}, onDelete: 'CASCADE'});
         },
         tableName: 'Ramo',
         timestamps: false
