@@ -17,7 +17,7 @@ module.exports = function (sequelize, DataTypes) {
         posicionD: { type: DataTypes.INTEGER }
     },{
         associate: function(models) {
-            Material.belongsTo(models.Topic, {foreignKey: 'topic_id'});
+            Material.belongsTo(models.Topic, {foreignKey: {name: 'topico_id'}, onDelete: 'CASCADE'});
         },
         tableName: 'Material',
         timestamps: false

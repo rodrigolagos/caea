@@ -1,0 +1,32 @@
+<div class="uk-grid">
+    <div class="uk-width-medium-1-4">
+        <div ng-include="'views/admin/includes/sidenav-menu.html'"></div>
+    </div>
+
+    <div class="uk-width-medium-3-4">
+        <ul class="uk-breadcrumb uk-margin-top">
+            <li><a href="/admin">Administración</a></li>
+            <li><a href="/admin/courses">Cursos</a></li>
+            <li><a href="/admin/course/{{ course.id }}">{{ course.nombre }}</a></li>
+            <li class="uk-active">Crear tópico</li>
+        </ul>
+        <h1 class="caea-title">Crear tópico</h1>
+        <div class="uk-panel-box">
+            <form class="uk-form uk-form-horizontal" name="topicForm">
+
+                <div class="uk-form-row">
+                    <label class="uk-form-label" for="titulo">Título</label>
+                    <div class="uk-form-controls">
+                        <input class="uk-width-1-1" type="text" id="titulo" name="titulo" placeholder="Título" ng-model="titulo" required>
+                    </div>
+                </div>
+
+                <div class="uk-form-row">
+                    <button class="uk-button uk-button-primary" ng-click="createTopic()" ng-disabled="topicForm.$invalid">Enviar</button>
+                    <a href="/admin/course/{{ course.id }}" class="uk-button">Cancelar</a>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>

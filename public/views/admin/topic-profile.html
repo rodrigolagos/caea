@@ -10,7 +10,7 @@
             <li><a href="/admin/course/{{ course.id }}">{{ course.nombre }}</a></li>
             <li class="uk-active">{{ topic.titulo }}</li>
         </ul>
-        <h1 class="caea-title">{{ topic.titulo }} <a class="uk-button uk-button-small"><i class="uk-icon-edit"></i> Editar</a> </h1>
+        <h1 class="caea-title">{{ topic.titulo }} <a href="/admin/topic/{{ topic.id }}/editar" class="uk-button uk-button-small"><i class="uk-icon-edit"></i> Editar</a> </h1>
         <table class="uk-table uk-table-striped">
             <thead>
             <tr>
@@ -38,7 +38,7 @@
             <div class="uk-grid" data-uk-grid="{gutter: 20, controls: '#my-id'}">
                 <div class="uk-width-medium-1-4" ng-repeat="material in materials" data-posiciona="{{ material.posicionA }}" data-posicionb="{{ material.posicionB }}" data-posicionc="{{ material.posicionC }}" data-posiciond="{{ material.posicionD }}">
                     <div class="uk-panel-box">
-                        <div class="uk-float-right uk-text-large"><a class="uk-link-muted" href=""><i class="uk-icon-edit"></i></a></div>
+                        <div class="uk-float-right uk-text-large"><a class="uk-link-muted" href="/admin/material/{{ material.id }}/editar"><i class="uk-icon-edit"></i></a><a class="uk-link-muted uk-margin-small-left" ng-click="deleteMaterial(material.id)"><i class="uk-icon-remove"></i></a></div>
                         <h4 class="uk-panel-title">{{ material.titulo }}</h4>
                         <p class="uk-margin-small-bottom">Tipo del material: <b>{{ material.tipo }}</b></p>
                     </div>

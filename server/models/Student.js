@@ -7,9 +7,9 @@ module.exports = function (sequelize, DataTypes) {
         }
     },{
         associate: function(models) {
-            Student.belongsTo(models.Student_Type, {foreignKey: 'tipo_id'});
-            Student.belongsTo(models.User, {foreignKey: 'user_id'});
-            Student.hasMany(models.Student_Course, {foreignKey: 'estudiante_id'});
+            Student.belongsTo(models.Student_Type, {foreignKey: {name: 'tipo_id'}, onDelete: 'CASCADE'});
+            Student.belongsTo(models.User, {foreignKey: {name: 'user_id'}, onDelete: 'CASCADE'});
+            Student.hasMany(models.Student_Course, {foreignKey: {name: 'estudiante_id'}, onDelete: 'CASCADE'});
         },
         tableName: 'Estudiante'
     });

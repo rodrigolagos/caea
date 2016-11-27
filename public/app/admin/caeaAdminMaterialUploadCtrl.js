@@ -55,7 +55,7 @@ angular.module('app').controller('caeaAdminMaterialUploadCtrl', function (Upload
                         descripcion: $scope.description,
                         tipo: type,
                         archivo: resp.data.filename,
-                        topic_id: $routeParams.topicId,
+                        topico_id: $routeParams.topicId,
                         posicionA: cantidad_materiales+1,
                         posicionB: cantidad_materiales+1,
                         posicionC: cantidad_materiales+1,

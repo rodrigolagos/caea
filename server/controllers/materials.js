@@ -23,7 +23,7 @@ exports.getMaterial = function (req, res) {
     })
 };
 exports.getMaterialsByTopicId = function (req, res) {
-    db.Material.findAll({where: {topic_id:req.params.topicId}}).then(function (materials) {
+    db.Material.findAll({where: {topico_id:req.params.topicId}}).then(function (materials) {
         if(materials.length < 1) {
             res.send({error:{status:404, message: "No se encontraron materiales."}});
         }
@@ -39,6 +39,12 @@ exports.updateMaterial = function (req, res) {
     db.Material.findOne({where: {id:req.params.id}}).then(function (material) {
         if(!material) {
             res.send({error:{status:404, message: "El material no existe"}});
+        }
+        if(materialUpdates.titulo!=undefined) {
+            material.titulo = materialUpdates.titulo;
+        }
+        if(materialUpdates.descripcion!=undefined) {
+            material.descripcion = materialUpdates.descripcion;
         }
         if(materialUpdates.posicionA!=undefined) {
             material.posicionA = materialUpdates.posicionA;
@@ -59,4 +65,15 @@ exports.updateMaterial = function (req, res) {
             return res.send({reason:err.toString()});
         });
     });
-}
+};
+
+exports.deleteMaterial = function (req, res) {
+    db.Material.findOne({where: {id:req.params.id}}).then(function (material) {
+        if(!material) {
+            res.send({error:{status:404, message: "El material no existe"}});
+        }
+        material.destroy().then(function () {
+            res.send({success:true});
+        });
+    })
+};

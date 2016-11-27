@@ -14,7 +14,7 @@
                 <select ng-model="sortOrder" ng-options="item.value as item.text for item in sortOptions"></select>
             </form>
         </div>
-        <h1 class="caea-title">Cursos <a class="uk-button uk-button-small" href=""><i class="uk-icon-plus"></i> Crear curso</a></h1>
+        <h1 class="caea-title">Cursos <a class="uk-button uk-button-small" href="/admin/course/crear"><i class="uk-icon-plus"></i> Crear curso</a></h1>
         <table class="uk-table uk-table-striped">
             <thead>
             <tr>
@@ -29,7 +29,7 @@
                 <td>{{ course.sigla }}</td>
                 <td class="uk-width-2-10">
                     <a class="uk-button uk-button-small" href="/admin/course/{{ course.id }}">Ver curso</a>
-                    <a class="uk-button uk-button-small uk-button-danger">Eliminar</a>
+                    <a class="uk-button uk-button-small uk-button-danger" ng-click="deleteCourse(course.id)">Eliminar</a>
                 </td>
             </tr>
             </tbody>

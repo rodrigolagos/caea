@@ -8,7 +8,7 @@ module.exports = function (sequelize, DataTypes) {
         estado: { type: DataTypes.STRING }
     },{
         associate: function(models) {
-            Request_Status.hasMany(models.Validation_Request, {foreignKey: 'estado_id'});
+            Request_Status.hasMany(models.Validation_Request, {foreignKey: {name: 'estado_id'}, onDelete: 'CASCADE'});
         },
         tableName: 'Estado',
         timestamps: false

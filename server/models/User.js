@@ -25,9 +25,9 @@ module.exports = function (sequelize, DataTypes) {
         }
     },{
         associate: function(models) {
-            User.hasMany(models.Student, {foreignKey: 'user_id'});
-            User.hasMany(models.Teacher, {foreignKey: 'user_id'});
-            User.belongsTo(models.User_Role, {foreignKey: 'rol_id'});
+            User.hasMany(models.Student, {foreignKey: {name: 'user_id'}, onDelete: 'CASCADE'});
+            User.hasMany(models.Teacher, {foreignKey: {name: 'user_id'}, onDelete: 'CASCADE'});
+            User.belongsTo(models.User_Role, {foreignKey: {name: 'rol_id'}, onDelete: 'CASCADE'});
         }
     });
 

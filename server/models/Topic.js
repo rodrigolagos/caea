@@ -10,8 +10,8 @@ module.exports = function (sequelize, DataTypes) {
         indice: { type: DataTypes.INTEGER }
     },{
         associate: function(models) {
-            Topic.belongsTo(models.Course, {foreignKey: 'ramo_id'});
-            Topic.hasMany(models.Material, {foreignKey: 'topico_id'});
+            Topic.belongsTo(models.Course, {foreignKey: {name: 'ramo_id'}, onDelete: 'CASCADE'});
+            Topic.hasMany(models.Material, {foreignKey: {name: 'topico_id'}, onDelete: 'CASCADE'});
         },
         tableName: 'Topico',
         timestamps: false

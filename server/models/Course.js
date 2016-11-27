@@ -10,9 +10,9 @@ module.exports = function (sequelize, DataTypes) {
         nombre: { type: DataTypes.STRING }
     },{
         associate: function(models) {
-            Course.hasMany(models.Topic, {foreignKey: 'ramo_id'});
-            Course.hasMany(models.Teacher_Course, {foreignKey: 'ramo_id'});
-            Course.hasMany(models.Student_Course, {foreignKey: 'ramo_id'});
+            Course.hasMany(models.Topic, {foreignKey: {name: 'ramo_id'}, onDelete: 'CASCADE'});
+            Course.hasMany(models.Teacher_Course, {foreignKey: {name: 'ramo_id'}, onDelete: 'CASCADE'});
+            Course.hasMany(models.Student_Course, {foreignKey: {name: 'ramo_id'}, onDelete: 'CASCADE'});
         },
         tableName: 'Ramo',
         timestamps: false

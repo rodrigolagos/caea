@@ -8,7 +8,7 @@ module.exports = function (sequelize, DataTypes) {
         pregunta: { type: DataTypes.STRING }
     },{
         associate: function(models) {
-            Pregunta.hasMany(models.Alternativa, {foreignKey: 'pregunta_id'});
+            Pregunta.hasMany(models.Alternativa, {foreignKey: {name: 'pregunta_id'}, onDelete: 'CASCADE'});
         }
     });
 

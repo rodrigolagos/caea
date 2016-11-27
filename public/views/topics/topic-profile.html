@@ -7,7 +7,7 @@
 <p>A continuación se muestran listados los materiales del tópico</p>
 <p class="uk-text-danger" ng-show="topic.materials.error">{{ topic.materials.error.message }}</p>
 
-<div ng-hide="topic.materials.error">
+<div ng-show="!topic.materials.error">
     <div ng-show="identity.isAuthorized(1) || identity.isAuthorized(2)">
         <ul id="my-id" class="uk-subnav uk-subnav-pill">
             <li data-uk-sort="posiciona"><a href="#">Divergente</a></li>

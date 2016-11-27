@@ -8,7 +8,7 @@ module.exports = function (sequelize, DataTypes) {
         rol: { type: DataTypes.STRING }
     },{
         associate: function(models) {
-            User_Role.hasMany(models.User, {foreignKey: 'rol_id'});
+            User_Role.hasMany(models.User, {foreignKey: {name: 'rol_id'}, onDelete: 'CASCADE'});
         },
         tableName: 'Rol'
     });

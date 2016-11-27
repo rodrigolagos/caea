@@ -9,7 +9,7 @@
             <li><a href="/admin/courses">Cursos</a></li>
             <li class="uk-active">{{ course.nombre }}</li>
         </ul>
-        <h1 class="caea-title">{{ course.nombre }} <a class="uk-button uk-button-small" href="#"><i class="uk-icon-edit"></i> Editar</a> </h1>
+        <h1 class="caea-title">{{ course.nombre }} <a class="uk-button uk-button-small" href="/admin/course/{{ course.id }}/editar"><i class="uk-icon-edit"></i> Editar</a> </h1>
         <table class="uk-table uk-table-striped">
             <thead>
             <tr>
@@ -25,12 +25,12 @@
             </tbody>
         </table>
 
-        <h3>Tópicos del curso <a class="uk-button uk-button-small" href=""><i class="uk-icon-plus"></i> Crear tópico</a></h3>
+        <h3>Tópicos del curso <a class="uk-button uk-button-small" href="/admin/course/{{ course.id }}/topic/crear"><i class="uk-icon-plus"></i> Crear tópico</a></h3>
         <div class="uk-panel-box uk-margin-small-top" ng-repeat="topic in course.topics">
             {{ topic.titulo }}
             <div class="uk-float-right">
-                <a class="uk-button uk-button-small" href="/admin/topic/{{ topic.id }}"><i class="uk-icon-info-circle"></i> Ver tópico</a>
-                <a class="uk-button uk-button-small uk-button-danger">Eliminar</a>
+                <a class="uk-button uk-button-small" href="/admin/topic/{{ topic.id }}">Ver tópico</a>
+                <a class="uk-button uk-button-small uk-button-danger" ng-click="deleteTopic(topic.id)">Eliminar</a>
             </div>
         </div>
     </div>

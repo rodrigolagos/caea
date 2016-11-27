@@ -12,7 +12,7 @@ angular.module('app').controller('caeaUserEditCtrl', function ($scope, caeaUser,
             email: $scope.email,
             firstName: $scope.fname,
             lastName: $scope.lname
-        }
+        };
         if($scope.password && $scope.password.length > 0) {
             newUserData.password = $scope.password;
         }

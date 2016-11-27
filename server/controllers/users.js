@@ -72,30 +72,8 @@ exports.deleteUser = function (req, res) {
         if(!user) {
             res.send({error:{status:404, message: "El usuario no existe"}});
         }
-        db.Student.findOne({where: {user_id:user.id}}).then(function (student) {
-            if(!student) {
-                db.Teacher.findOne({where: {user_id:user.id}}).then(function (teacher) {
-                    if(!teacher) {
-                        user.destroy().then(function () {
-                            res.send({success:true});
-                        })
-                    }
-                    teacher.destroy().then(function () {
-                        user.destroy().then(function () {
-                            res.send({success:true});
-                        })
-                    })
-                });
-                user.destroy().then(function () {
-                    res.send({success:true});
-                })
-            }
-            student.destroy().then(function () {
-                user.destroy().then(function () {
-                    res.send({success:true});
-                })
-            })
-
-        });
+        user.destroy().then(function () {
+            res.send({success:true});
+        })
     })
 };
