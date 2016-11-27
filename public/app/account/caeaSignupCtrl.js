@@ -15,7 +15,7 @@ angular.module('app').controller('caeaSignupCtrl', function ($scope, caeaUser, c
         };
 
         caeaAuth.createUser(newUserData).then(function () {
-            caeaNotifier.success('User account created!');
+            caeaNotifier.success('Usuario creado correctamente!');
             $location.path('/');
         }, function (reason) {
             caeaNotifier.error(reason);
@@ -34,7 +34,7 @@ angular.module('app').controller('caeaSignupCtrl', function ($scope, caeaUser, c
         };
 
         caeaAuth.createUser(newUserData).then(function () {
-            caeaNotifier.success('User account created!');
+            caeaNotifier.success('Usuario creado correctamente!');
             $location.path('/');
         }, function (reason) {
             caeaNotifier.error(reason);
