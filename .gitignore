@@ -2,5 +2,5 @@
 node_modules
 public/vendor
 server/config/config.js
-public/files
+public/files/*
 .DS_Store
