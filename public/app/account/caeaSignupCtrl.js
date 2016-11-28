@@ -3,23 +3,27 @@ angular.module('app').controller('caeaSignupCtrl', function ($scope, caeaUser, c
     $scope.alternativas = caeaAlternativa.query();
     $scope.solicitud = "Nombre Completo:\nSoy profesor de\nTrabajo en\nMi motivación para unirme a esta plataforma es"
     $scope.studentSignup = function () {
-        var newUserData = {
-            firstName: $scope.fname,
-            lastName: $scope.lname,
-            email: $scope.username + $("#select-mail").val(),
-            username: $scope.username,
-            rol_id: 3,
-            password: $scope.password,
-            tipo_id: calcularTipo(),
-            byAdmin: false
-        };
+        if(validacionEncuesta()) {
+            var newUserData = {
+                firstName: $scope.fname,
+                lastName: $scope.lname,
+                email: $scope.username + $("#select-mail").val(),
+                username: $scope.username,
+                rol_id: 3,
+                password: $scope.password,
+                tipo_id: calcularTipo(),
+                byAdmin: false
+            };
 
-        caeaAuth.createUser(newUserData).then(function () {
-            caeaNotifier.success('Usuario creado correctamente!');
-            $location.path('/');
-        }, function (reason) {
-            caeaNotifier.error(reason);
-        })
+            caeaAuth.createUser(newUserData).then(function () {
+                caeaNotifier.success('Usuario creado correctamente!');
+                $location.path('/');
+            }, function (reason) {
+                caeaNotifier.error(reason);
+            })
+        } else {
+            caeaNotifier.error('Debe responder la encuesta');
+        }
     };
     $scope.teacherSignup = function () {
         var newUserData = {
@@ -39,6 +43,35 @@ angular.module('app').controller('caeaSignupCtrl', function ($scope, caeaUser, c
         }, function (reason) {
             caeaNotifier.error(reason);
         })
+    };
+
+    var validacionEncuesta = function () {
+        var sumaEC = 0;
+        var sumaOR = 0;
+        var sumaCA = 0;
+        var sumaEA = 0;
+
+        $('.1').each(function(){
+            sumaEC += parseFloat($(this).val());
+        });
+
+        $('.2').each(function(){
+            sumaOR += parseFloat($(this).val());
+        });
+
+        $('.3').each(function(){
+            sumaCA += parseFloat($(this).val());
+        });
+
+        $('.4').each(function(){
+            sumaEA += parseFloat($(this).val());
+        });
+
+        if( sumaEC == 12 && sumaOR == 12 && sumaCA == 12 && sumaEA == 12 ) {
+            return false;
+        } else {
+            return true;
+        }
     };
 
     var calcularTipo = function() {
