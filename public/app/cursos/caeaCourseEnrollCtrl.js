@@ -2,8 +2,8 @@ angular.module('app').controller('caeaCourseEnrollCtrl', function ($scope, caeaC
     $scope.identity = caeaIdentity;
     $scope.courses = caeaCourse.query();
 
-    $scope.sortOptions = [{ value: "title", text: "Ordenar por titulo" },
-        { value: "published", text: "Ordenar por fecha"}];
+    $scope.sortOptions = [{ value: "sigla", text: "Ordenar por sigla"},
+        { value: "nombre", text: "Ordenar por nombre" }];
 
     $scope.sortOrder = $scope.sortOptions[0].value;
 
