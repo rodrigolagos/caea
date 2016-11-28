@@ -37,7 +37,7 @@ module.exports = function (app) {
     app.post('/api/topics', auth.requireAuthentication, topics.createTopic);
     app.get('/api/topics/:id', auth.requireAuthentication, topics.getTopic);
     app.get('/api/courses/:courseId/topics', auth.requireAuthentication, topics.getTopicsByCourseId);
-    app.put('/api/topics/:id', auth.requiresRole(1), topics.updateTopic);
+    app.put('/api/topics/:id', auth.requireAuthentication, topics.updateTopic);
     app.delete('/api/topics/:id', auth.requireAuthentication, topics.deleteTopic);
 
     app.get('/api/materials', auth.requireAuthentication, materials.getMaterials);
