@@ -34,18 +34,18 @@ module.exports = function (app) {
     app.post('/api/teacher-courses', teacher_courses.createTeacherCourse);
 
     app.get('/api/topics', auth.requireAuthentication, topics.getTopics);
-    app.post('/api/topics', auth.requiresRole(1), topics.createTopic);
+    app.post('/api/topics', auth.requireAuthentication, topics.createTopic);
     app.get('/api/topics/:id', auth.requireAuthentication, topics.getTopic);
     app.get('/api/courses/:courseId/topics', auth.requireAuthentication, topics.getTopicsByCourseId);
     app.put('/api/topics/:id', auth.requiresRole(1), topics.updateTopic);
-    app.delete('/api/topics/:id', auth.requiresRole(1), topics.deleteTopic);
+    app.delete('/api/topics/:id', auth.requireAuthentication, topics.deleteTopic);
 
     app.get('/api/materials', auth.requireAuthentication, materials.getMaterials);
-    app.post('/api/materials', auth.requiresRole(1), materials.createMaterial);
+    app.post('/api/materials', auth.requireAuthentication, materials.createMaterial);
     app.get('/api/topics/:topicId/materials', auth.requireAuthentication, materials.getMaterialsByTopicId);
     app.get('/api/materials/:id', auth.requireAuthentication, materials.getMaterial);
-    app.put('/api/materials/:id', auth.requiresRole(1), materials.updateMaterial);
-    app.delete('/api/materials/:id', auth.requiresRole(1), materials.deleteMaterial);
+    app.put('/api/materials/:id', auth.requireAuthentication, materials.updateMaterial);
+    app.delete('/api/materials/:id', auth.requireAuthentication, materials.deleteMaterial);
 
     app.get('/api/materials/:materialId/comments', auth.requireAuthentication, material_comments.getMaterialCommentsByMaterialId);
     app.post('/api/material-comments', auth.requireAuthentication, material_comments.createMaterialComment);

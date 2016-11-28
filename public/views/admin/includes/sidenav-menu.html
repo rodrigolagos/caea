@@ -1,8 +1,11 @@
 <div class="admin-sidenav" ng-controller="caeaHeaderCtrl">
     <ul class="uk-nav uk-nav-side" data-uk-nav="">
         <li class="uk-nav-header">Menu Administración</li>
-        <li ng-class="{ 'uk-active': isActive('/admin') }"><a href="/admin">Inicio</a></li>
-        <li ng-class="{'uk-active': $route.current.subparent == 'admin/users'}"><a href="/admin/users">Usuarios</a></li>
-        <li ng-class="{'uk-active': $route.current.subparent == 'admin/courses'}"><a href="/admin/courses">Cursos</a></li>
+        <li ng-show="identity.isAuthorized(1)" ng-class="{ 'uk-active': isActive('/admin') }"><a href="/admin">Inicio</a></li>
+        <li ng-show="identity.isAuthorized(2)" ng-class="{ 'uk-active': isActive('/admin') }"><a>Inicio</a></li>
+        <li ng-show="identity.isAuthorized(1)" ng-class="{'uk-active': $route.current.subparent == 'admin/users'}"><a href="/admin/users">Usuarios</a></li>
+        <li ng-show="identity.isAuthorized(2)" ng-class="{'uk-active': $route.current.subparent == 'admin/users'}"><a>Usuarios</a></li>
+        <li ng-show="identity.isAuthorized(1)" ng-class="{'uk-active': $route.current.subparent == 'admin/courses'}"><a href="/admin/courses">Cursos</a></li>
+        <li ng-show="identity.isAuthorized(2)" ng-class="{'uk-active': $route.current.subparent == 'admin/courses'}"><a>Cursos</a></li>
     </ul>
 </div>

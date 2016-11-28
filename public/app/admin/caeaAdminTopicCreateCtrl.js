@@ -1,4 +1,5 @@
-angular.module('app').controller('caeaAdminTopicCreateCtrl', function ($scope, caeaCourse, caeaTopic, $routeParams, caeaAuth, caeaNotifier, $location) {
+angular.module('app').controller('caeaAdminTopicCreateCtrl', function ($scope, caeaCourse, caeaTopic, $routeParams, caeaAuth, caeaNotifier, $location, caeaIdentity) {
+    $scope.identity = caeaIdentity;
     $scope.course = caeaCourse.get({id:$routeParams.courseId});
     $scope.createTopic = function () {
         var newTopicData = {

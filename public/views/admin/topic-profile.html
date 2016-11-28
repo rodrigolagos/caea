@@ -4,9 +4,15 @@
     </div>
 
     <div class="uk-width-medium-3-4">
-        <ul class="uk-breadcrumb uk-margin-top">
+        <ul ng-show="identity.isAuthorized(1)" class="uk-breadcrumb uk-margin-top">
             <li><a href="/admin">Administración</a></li>
             <li><a href="/admin/courses">Cursos</a></li>
+            <li><a href="/admin/course/{{ course.id }}">{{ course.nombre }}</a></li>
+            <li class="uk-active">{{ topic.titulo }}</li>
+        </ul>
+        <ul ng-show="identity.isAuthorized(2)" class="uk-breadcrumb uk-margin-top">
+            <li>Administración</li>
+            <li>Cursos</li>
             <li><a href="/admin/course/{{ course.id }}">{{ course.nombre }}</a></li>
             <li class="uk-active">{{ topic.titulo }}</li>
         </ul>

@@ -107,7 +107,7 @@ angular.module('app').config(function ($routeProvider, $locationProvider, pagina
         .when('/admin/course/:courseId', {
             templateUrl: 'views/admin/course-profile.html',
             controller: 'caeaCourseProfileCtrl',
-            roles: ['admin'],
+            roles: ['admin', 'validated_teacher'],
             parent: 'admin', subparent: 'admin/courses'
         })
         .when('/admin/course/:courseId/editar', {
@@ -119,37 +119,37 @@ angular.module('app').config(function ($routeProvider, $locationProvider, pagina
         .when('/admin/course/:courseId/topic/crear', {
             templateUrl: 'views/admin/topic-create.html',
             controller: 'caeaAdminTopicCreateCtrl',
-            roles: ['admin'],
+            roles: ['admin', 'validated_teacher'],
             parent: 'admin', subparent: 'admin/courses'
         })
         .when('/admin/topic/:topicId', {
             templateUrl: 'views/admin/topic-profile.html',
             controller: 'caeaAdminTopicProfileCtrl',
-            roles: ['admin'],
+            roles: ['admin', 'validated_teacher'],
             parent: 'admin', subparent: 'admin/courses'
         })
         .when('/admin/topic/:topicId/editar', {
             templateUrl: 'views/admin/topic-edit.html',
             controller: 'caeaAdminTopicEditCtrl',
-            roles: ['admin'],
+            roles: ['admin', 'validated_teacher'],
             parent: 'admin', subparent: 'admin/courses'
         })
         .when('/admin/topic/:topicId/materials/learning/:learningId/ordenar', {
             templateUrl: 'views/admin/material-order.html',
             controller: 'caeaAdminMaterialOrderCtrl',
-            roles: ['admin'],
+            roles: ['admin', 'validated_teacher'],
             parent: 'admin', subparent: 'admin/courses'
         })
         .when('/admin/material/:materialId/editar', {
             templateUrl: 'views/admin/material-edit.html',
             controller: 'caeaAdminMaterialEditCtrl',
-            roles: ['admin'],
+            roles: ['admin', 'validated_teacher'],
             parent: 'admin', subparent: 'admin/courses'
         })
         .when('/admin/topic/:topicId/materials/crear', {
             templateUrl: 'views/admin/material-upload.html',
             controller: 'caeaAdminMaterialUploadCtrl',
-            roles: ['admin'],
+            roles: ['admin', 'validated_teacher'],
             parent: 'admin', subparent: 'admin/courses'
         })
         .when('/forum', {

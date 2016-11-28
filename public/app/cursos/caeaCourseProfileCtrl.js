@@ -37,7 +37,7 @@ angular.module('app').controller('caeaCourseProfileCtrl', function ($scope, $rou
                     }).catch(function (err) {
                         console.log(err);
                     });
-                    caeaNotifier.success('Curso eliminado correctamente');
+                    caeaNotifier.success('Tópico eliminado correctamente');
                 }
             });
         }, {labels: {'Ok': 'Eliminar', 'Cancel': 'Cancelar'}});

@@ -1,4 +1,5 @@
-angular.module('app').controller('caeaAdminCourseEditCtrl', function ($scope, caeaCourse, $routeParams, caeaAuth, caeaNotifier) {
+angular.module('app').controller('caeaAdminCourseEditCtrl', function ($scope, caeaCourse, $routeParams, caeaAuth, caeaNotifier, caeaIdentity) {
+    $scope.identity = caeaIdentity;
     var courseObject;
     $scope.course = caeaCourse.get({id:$routeParams.courseId}, function (course) {
         $scope.nombre = course.nombre;

@@ -1,4 +1,5 @@
-angular.module('app').controller('caeaAdminMaterialEditCtrl', function ($scope, caeaCourse, $routeParams, caeaAuth, caeaNotifier, caeaTopic, caeaMaterial) {
+angular.module('app').controller('caeaAdminMaterialEditCtrl', function ($scope, caeaCourse, $routeParams, caeaAuth, caeaNotifier, caeaTopic, caeaMaterial, caeaIdentity) {
+    $scope.identity = caeaIdentity;
     var materialObject;
     $scope.material = caeaMaterial.get({id:$routeParams.materialId}, function (material) {
         $scope.topic = caeaTopic.get({id:material.topico_id}, function (topic) {

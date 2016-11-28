@@ -1,4 +1,5 @@
-angular.module('app').controller('caeaAdminMaterialUploadCtrl', function (Upload, $window, caeaNotifier, $scope, caeaTopic, $routeParams, caeaCourse, caeaMaterial, $q, $http) {
+angular.module('app').controller('caeaAdminMaterialUploadCtrl', function (Upload, $window, caeaNotifier, $scope, caeaTopic, $routeParams, caeaCourse, caeaMaterial, $q, $http, caeaIdentity) {
+    $scope.identity = caeaIdentity;
     $scope.topic = caeaTopic.get({id:$routeParams.topicId}, function (topic) {
         $scope.course = caeaCourse.get({id:topic.ramo_id});
     });
