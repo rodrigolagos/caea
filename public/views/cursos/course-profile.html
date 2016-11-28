@@ -2,7 +2,7 @@
     <li><a href="/">Mis cursos</a></li>
     <li>{{ course.nombre }}</li>
 </ul>
-<h1>{{ course.nombre }} <a class="uk-button uk-button-small uk-button-primary uk-margin-left" ng-show="identity.isAuthorized(1) || identity.isAuthorized(2)"><i class="uk-icon-edit"></i> Editar curso</a></h1>
+<h1>{{ course.nombre }} <a href="/admin/course/{{ course.id }}/editar" class="uk-button uk-button-small uk-button-primary uk-margin-left" ng-show="identity.isAuthorized(1) || identity.isAuthorized(2)"><i class="uk-icon-edit"></i> Editar curso</a></h1>
 <p>A continuación se muestran listadas las unidades del curso</p>
 <table class="uk-table uk-table-striped">
     <tbody>

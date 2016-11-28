@@ -18,6 +18,7 @@ module.exports = function (sequelize, DataTypes) {
     },{
         associate: function(models) {
             Material.belongsTo(models.Topic, {foreignKey: {name: 'topico_id'}, onDelete: 'CASCADE'});
+            Material.hasMany(models.Material_Comment, {foreignKey: {name: 'material_id'}, onDelete: 'CASCADE'});
         },
         tableName: 'Material',
         timestamps: false

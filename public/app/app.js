@@ -113,7 +113,7 @@ angular.module('app').config(function ($routeProvider, $locationProvider, pagina
         .when('/admin/course/:courseId/editar', {
             templateUrl: 'views/admin/course-edit.html',
             controller: 'caeaAdminCourseEditCtrl',
-            roles: ['admin'],
+            roles: ['admin', 'validated_teacher'],
             parent: 'admin', subparent: 'admin/courses'
         })
         .when('/admin/course/:courseId/topic/crear', {

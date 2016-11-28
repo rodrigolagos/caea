@@ -20,9 +20,9 @@
         <div class="uk-grid" data-uk-grid="{gutter: 20, controls: '#my-id'}">
             <div class="uk-width-medium-1-3" ng-repeat="material in topic.materials" data-posiciona="{{ material.posicionA }}" data-posicionb="{{ material.posicionB }}" data-posicionc="{{ material.posicionC }}" data-posiciond="{{ material.posicionD }}">
                 <div class="uk-panel-box">
-                    <div class="uk-float-right uk-text-large" ng-show="material.tipo == 'image'"><a ng-click="viewMaterial('image', '/files/'+material.archivo)"><i class="uk-icon-file-image-o"></i></a></div>
-                    <div class="uk-float-right uk-text-large" ng-show="material.tipo == 'pdf'"><a ng-click="viewMaterial('pdf', '/pdf/'+material.archivo)"><i class="uk-icon-file-pdf-o"></i></a></div>
-                    <div class="uk-float-right uk-text-large" ng-show="material.tipo == 'video'"><a ng-click="viewMaterial('video', '/files/'+material.archivo)"><i class="uk-icon-file-video-o"></i></a></div>
+                    <div class="uk-float-right uk-text-large" ng-show="material.tipo == 'image'"><a ng-click="viewMaterial('image', '/files/'+material.archivo, material.id)"><i class="uk-icon-file-image-o"></i></a></div>
+                    <div class="uk-float-right uk-text-large" ng-show="material.tipo == 'pdf'"><a ng-click="viewMaterial('pdf', '/pdf/'+material.archivo, material.id)"><i class="uk-icon-file-pdf-o"></i></a></div>
+                    <div class="uk-float-right uk-text-large" ng-show="material.tipo == 'video'"><a ng-click="viewMaterial('video', '/files/'+material.archivo, material.id)"><i class="uk-icon-file-video-o"></i></a></div>
                     <h3 class="uk-panel-title">{{ material.titulo }}</h3>
                     <p>{{ material.descripcion }}</p>
                 </div>
@@ -33,9 +33,9 @@
         <div class="uk-grid" data-uk-grid="{gutter: 20}">
             <div class="uk-width-medium-1-3" ng-repeat="material in topic.materials | orderBy:tipoAprendizaje">
                 <div class="uk-panel-box">
-                    <div class="uk-float-right uk-text-large" ng-show="material.tipo == 'image'"><a ng-click="viewMaterial('image', '/files/'+material.archivo)"><i class="uk-icon-file-image-o"></i></a></div>
-                    <div class="uk-float-right uk-text-large" ng-show="material.tipo == 'pdf'"><a ng-click="viewMaterial('pdf', '/pdf/'+material.archivo)"><i class="uk-icon-file-pdf-o"></i></a></div>
-                    <div class="uk-float-right uk-text-large" ng-show="material.tipo == 'video'"><a ng-click="viewMaterial('video', '/files/'+material.archivo)"><i class="uk-icon-file-video-o"></i></a></div>
+                    <div class="uk-float-right uk-text-large" ng-show="material.tipo == 'image'"><a ng-click="viewMaterial('image', '/files/'+material.archivo, material.id)"><i class="uk-icon-file-image-o"></i></a></div>
+                    <div class="uk-float-right uk-text-large" ng-show="material.tipo == 'pdf'"><a ng-click="viewMaterial('pdf', '/pdf/'+material.archivo, material.id)"><i class="uk-icon-file-pdf-o"></i></a></div>
+                    <div class="uk-float-right uk-text-large" ng-show="material.tipo == 'video'"><a ng-click="viewMaterial('video', '/files/'+material.archivo, material.id)"><i class="uk-icon-file-video-o"></i></a></div>
                     <h3 class="uk-panel-title">{{ material.titulo }}</h3>
                     <p>{{ material.descripcion }}</p>
                 </div>
@@ -46,11 +46,27 @@
 
 <div id="modal-id" class="uk-modal">
     <div class="uk-modal-dialog uk-modal-dialog-large">
-        <a class="uk-modal-close uk-close"></a>
         <div class="uk-grid uk-container">
             <div id="content" class="uk-width-medium-3-4 uk-width-small-1-1 uk-text-center uk-border-rounded"></div>
             <div class="uk-width-medium-1-4 uk-width-small-1-1">
-                <h3>Comentarios</h3>
+                <h3><i class="uk-icon-comment"></i> Comentarios</h3>
+                <div style="min-height:390px; max-height: 390px; border:none; overflow-y: scroll" class="comments uk-margin-bottom">
+                    <div ng-repeat="comment in comments">
+                        <h5 class="uk-margin-small-bottom">{{comment.fecha_hora | date}}</h5>
+                        <p class="uk-margin-small-bottom uk-margin-small-top">{{ comment.comentario }}</p>
+                        <hr class="uk-grid-divider uk-margin-top">
+                    </div>
+                </div>
+                <form ng-show="identity.isAuthorized(3)" class="uk-form uk-form-horizontal" name="commentForm">
+
+                    <h5 class="uk-margin-bottom-remove">Ingresar Comentario</h5>
+                    <textarea style="max-height: 60px" class="uk-width-1-1 comment" id="comment" name="comment" ng-model="comment" required></textarea>
+
+                    <div class="uk-form-row">
+                        <button class="uk-button uk-button-primary uk-button-small uk-margin-small-top uk-margin-bottom" ng-click="sendComment()" ng-disabled="commentForm.$invalid">Enviar</button>
+                    </div>
+
+                </form>
             </div>
         </div>
     </div>

@@ -10,6 +10,7 @@ var auth = require('../controllers/auth'),
     validation_requests = require('../controllers/validation_requests'),
     student_courses = require('../controllers/student_courses'),
     teacher_courses = require('../controllers/teacher_courses'),
+    material_comments = require('../controllers/material_comments'),
     multer = require('./multer');
 
 module.exports = function (app) {
@@ -23,7 +24,7 @@ module.exports = function (app) {
     app.get('/api/courses', auth.requireAuthentication, courses.getCourses);
     app.post('/api/courses', auth.requiresRole(1), courses.createCourse);
     app.get('/api/courses/:id', auth.requireAuthentication, courses.getCourse);
-    app.put('/api/courses/:id', auth.requiresRole(1), courses.updateCourse);
+    app.put('/api/courses/:id', auth.requireAuthentication, courses.updateCourse);
     app.delete('/api/courses/:id', auth.requiresRole(1), courses.deleteCourse);
 
     app.get('/api/students/:studentId/student-courses', student_courses.getStudentCourseByStudentId);
@@ -45,6 +46,9 @@ module.exports = function (app) {
     app.get('/api/materials/:id', auth.requireAuthentication, materials.getMaterial);
     app.put('/api/materials/:id', auth.requiresRole(1), materials.updateMaterial);
     app.delete('/api/materials/:id', auth.requiresRole(1), materials.deleteMaterial);
+
+    app.get('/api/materials/:materialId/comments', auth.requireAuthentication, material_comments.getMaterialCommentsByMaterialId);
+    app.post('/api/material-comments', auth.requireAuthentication, material_comments.createMaterialComment);
 
     app.get('/api/preguntas', preguntas.getPreguntas);
     app.get('/api/alternativas', alternativas.getAlternativas);
